@@ -36,7 +36,7 @@
         <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button" data-auto-collapse-size="1960"><i class="fas fa-bars"></i></a>
             </li>
 
         </ul>
@@ -78,17 +78,25 @@
             <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
-                    <li class="nav-header">EXAMPLES</li>
-
+                    @if (request()->routeIs('dashboard'))
                     <li class="nav-item">
-                        <a href="pages/gallery.html" class="nav-link active">
+                        <a href="{{route('dashboard')}}" class="nav-link active " data-card-widget="card-refresh" data-source="/URL-TO-CONTENT">
                             <i class="nav-icon far fa-image"></i>
                             <p>
                                 Dashboard
                             </p>
                         </a>
                     </li>
+                    @else
+                        <li class="nav-item">
+                            <a href="pages/gallery.html" class="nav-link ">
+                                <i class="nav-icon far fa-image"></i>
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                        </li>
+                    @endif
 
 
 
@@ -101,18 +109,17 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <!-- Main content -->
+
         <section class="content">
             <div class="container-fluid">
 
+                @include('include.content')
 
-
-            </div><!-- /.container-fluid -->
+            </div>
         </section>
         <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
+
     <footer class="main-footer">
 
     </footer>
