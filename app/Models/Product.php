@@ -13,5 +13,6 @@ class Product extends Model
         'priceP',
         'priceS',
         'qty',
+        'category_id',
     ];
 }

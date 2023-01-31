@@ -16,6 +16,17 @@ class CartController extends Controller
 
     public function addToCart(Request $request)
     {
+          
+        // for ($i=0; $i < 170000; $i++) { 
+        //    $model = new Product;
+        //     $model->name = "test1";
+        //  $model->priceP = 10;
+        //  $model->priceS = 20;
+        // $model->qty = 10;
+        // $model->category_id = 1;
+        // $model->save();
+        // }
+       
 
         $item = Product::find($request);
 
@@ -52,7 +63,7 @@ class CartController extends Controller
 
         session()->flash('success', 'Item Cart is Updated Successfully !');
 
-        return redirect()->route('shop_p');
+        return redirect()->route('shopP');
     }
 
     public function removeCart(Request $request)
@@ -60,7 +71,7 @@ class CartController extends Controller
         \Cart::remove($request->id);
         session()->flash('success', 'Item Cart Remove Successfully !');
 
-        return redirect()->route('shop_p');
+        return redirect()->route('shopP');
     }
 
     public function clearAllCart()
@@ -69,6 +80,6 @@ class CartController extends Controller
 
         session()->flash('success', 'All Item Cart Clear Successfully !');
 
-        return redirect()->route('shop_p');
+        return redirect()->route('shopP');
     }
 }

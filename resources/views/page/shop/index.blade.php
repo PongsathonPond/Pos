@@ -83,15 +83,19 @@
                                     </td>
 
                                     <td class="align-middle">
-                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                            data-toggle="tooltip" data-original-title="Edit user">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
+                                        <form action="{{ route('cart.remove') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" value="{{ $item->id }}" name="id">
+                      
+                                            <button  class="btn bg-gradient-danger btn-sm"> <i class="fas fa-trash"></i></button>
+                                        </form>
+                                     
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    Total: ${{ Cart::getTotal() }}
                 </div>
             </div>
         </div>
