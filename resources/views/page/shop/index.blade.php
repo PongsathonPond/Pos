@@ -13,10 +13,12 @@
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
-                <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
+
+                          <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
+
+                        @csrf
                     <div class="input-group input-group-static mb-4">
-                        <input type="text" class="form-control" name="item" id="inputkey" placeholder="BARCODE ID">
+                        <input type="text" class="form-control" name="name" id="inputkey" placeholder="BARCODE ID">
                     </div>
                 </form>
             </div>
@@ -86,10 +88,10 @@
                                         <form action="{{ route('cart.remove') }}" method="POST">
                                             @csrf
                                             <input type="hidden" value="{{ $item->id }}" name="id">
-                      
+
                                             <button  class="btn bg-gradient-danger btn-sm"> <i class="fas fa-trash"></i></button>
                                         </form>
-                                     
+
                                     </td>
                                 </tr>
                             @endforeach
@@ -106,4 +108,5 @@
             document.getElementById("inputkey").focus();
         }
     </script>
+
 @endsection

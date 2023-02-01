@@ -14,19 +14,11 @@ class CartController extends Controller
         return view('page.shop.index', compact('cartItems'));
     }
 
+
+
+
     public function addToCart(Request $request)
     {
-          
-        // for ($i=0; $i < 170000; $i++) { 
-        //    $model = new Product;
-        //     $model->name = "test1";
-        //  $model->priceP = 10;
-        //  $model->priceS = 20;
-        // $model->qty = 10;
-        // $model->category_id = 1;
-        // $model->save();
-        // }
-       
 
         $item = Product::find($request);
 
@@ -46,7 +38,13 @@ class CartController extends Controller
 
         }
 
-        return redirect()->route('shopP');
+           return redirect()->route('shopP');
+
+
+
+
+
+
     }
 
     public function updateCart(Request $request)

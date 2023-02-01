@@ -38,6 +38,8 @@ Route::middleware([
     Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
 
 
+
     Route::get('/product', [ProductController::class, 'index'])->name('product.index');
+    Route::post('/product/store', [ProductController::class, 'store'])->name('product_store');
 
 });
