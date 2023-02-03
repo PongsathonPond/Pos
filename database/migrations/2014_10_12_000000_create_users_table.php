@@ -32,7 +32,7 @@ return new class extends Migration
         });
 
         Schema::create('products', function (Blueprint $table) {
-            $table->id();
+            $table->string('id_product')->primary();
             $table->unsignedBigInteger('category_id');
             $table->string('name');
             $table->decimal('priceP', 10, 2);
@@ -55,13 +55,13 @@ return new class extends Migration
 
         Schema::create('order_product', function (Blueprint $table) {
             $table->unsignedBigInteger('order_id');
-            $table->unsignedBigInteger('product_id');
+            $table->string('product_id');
             $table->integer('quantity');
             $table->decimal('price', 10, 2);
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('product_id')->references('id_product')->on('products')->onDelete('cascade');
         });
-      
+
 //        Schema::create('debtors', function (Blueprint $table) {
 //            $table->id();
 //            $table->string('name');

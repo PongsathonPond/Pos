@@ -10,13 +10,16 @@ class ProductController extends Controller
     public function index()
     {
         $typeCategory = Categories::all();
-        return view('page.product.index',compact('typeCategory'));
+        $product = Product::paginate(10);
+
+
+        return view('page.product.index',compact('typeCategory','product'));
     }
 
     public function store(Request $request)
     {
         $tableName = new Product();
-        $tableName->id = $request->id;
+        $tableName->id_product = $request->id;
         $tableName->name = $request->name;
         $tableName->priceP = $request->priceP;
         $tableName->priceS = $request->priceS;

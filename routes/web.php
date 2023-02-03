@@ -40,6 +40,8 @@ Route::middleware([
 
 
     Route::get('/product', [ProductController::class, 'index'])->name('product.index');
-    Route::post('/product/store', [ProductController::class, 'store'])->name('product_store');
+
+  Route::post('/product/store', [ProductController::class, 'store'])->name('product_store');
+
 
 });

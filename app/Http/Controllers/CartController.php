@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class CartController extends Controller
 {
     public function cartList()
@@ -20,13 +20,16 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
 
-        $item = Product::find($request);
 
-        if (count($item) === 0) {
+        $item = DB::table('products')
+            ->where('id_product', '=', $request->name)
+            ->get();
+
+        if (empty($item[0])) {
             session()->flash('error', 'Product is Added to Cart Successfully !');
         } else {
             \Cart::add([
-                'id' => $item[0]->id,
+                'id' => $item[0]->id_product,
                 'name' => $item[0]->name,
                 'price' => $item[0]->priceP,
                 'quantity' => 1,

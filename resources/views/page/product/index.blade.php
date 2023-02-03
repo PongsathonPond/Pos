@@ -14,8 +14,8 @@
             </div>
             <div class="card-body p-3 pb-0">
 
-                    <form action="{{ route('product_store') }}" method="POST" enctype="multipart/form-data">
-
+                   <form action="{{ route('product_store') }}" method="POST" enctype="multipart/form-data">
+                <form id="post-form">
                             @csrf
                     <div class="row">
 
@@ -79,10 +79,58 @@
     </div>
 
     <div class="col-lg-10">
+        <div class="card">
+            <div class="table-responsive">
+                <table class="table align-items-center mb-0">
+                    <thead>
+                    <tr>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">รหัสสินค้า</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">ชื่อสินค้า</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Completion</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
+
+                 @foreach($product as $item)
+
+                    <tr>
+                        <td>
+                            <div class="d-flex px-2">
+                                <div class="my-auto">
+                                    {{$item->id_product}}
+
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+
+                            {{$item->name}}
+                        </td>
+                        <td>
+
+                        </td>
+                        <td class="align-middle text-center">
+
+                        </td>
+
+                        <td class="align-middle">
+
+                            </button>
+                        </td>
+                    </tr>
+
+                 @endforeach
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
     </div>
-
 
 
 
