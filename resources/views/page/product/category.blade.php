@@ -6,54 +6,24 @@
             <div class="card-header pb-0 p-3">
                 <div class="row">
                     <div class="col-6 d-flex align-items-center">
-                        <h6 class="mb-0">เพิ่มสินค้า</h6>
+                        <h6 class="mb-0">ประเภทสินค้า</h6>
                     </div>
 
                 </div>
             </div>
             <div class="card-body p-3 pb-0">
 
-                <form action="{{ route('product_store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('category_store') }}" method="POST" enctype="multipart/form-data">
                     <form id="post-form">
                         @csrf
                         <div class="row">
 
-
                             <div class="input-group input-group-outline my-3">
-                                <input type="text" class="form-control" placeholder="ชื่อสินค้า" name="name">
+                                <input type="text" class="form-control" placeholder="ชื่อประเภท" name="name">
                             </div>
 
-                            <div class="input-group input-group-outline mb-1">
-                                <select class="form-control" id="exampleFormControlSelect1" name="category_id">
-                                    <option>กรุณาเลือกประเภท</option>
-                                    @foreach ($typeCategory as $item)
-                                        <option value="{{ $item->id }}">{{ $item->id }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-6">
-                                <div class="input-group input-group-outline my-3">
-                                    <input type="text" class="form-control" placeholder="ราคาปลีก" name="priceP">
-                                </div>
 
-
-                            </div>
-                            <div class="col-6">
-                                <div class="input-group input-group-outline my-3">
-                                    <input type="text" class="form-control" placeholder="ราคาส่ง" name="priceS">
-                                </div>
-
-
-                            </div>
-                            <div class="input-group input-group-outline my-1">
-                                <input type="text" class="form-control" placeholder="จำนวน" name="qty">
-                            </div>
-
-                            <div class="input-group input-group-static my-3">
-                                <input type="text" class="form-control" placeholder="BARCODE ID" name="id">
-                            </div>
-
-                            <button type="input" class="btn btn-success">Add Product</button>
+                            <button type="input" class="btn btn-success">Add Category</button>
 
 
                         </div>
@@ -66,7 +36,7 @@
 
         @if (session('success'))
             <div class="alert alert-success" role="alert">
-                <strong>สำเร็จ !</strong> เพิ่มสินค้าลงในรายการขายเรียบร้อย
+                <strong>สำเร็จ !</strong> เพิ่มประเภทสินค้าเรียบร้อย
             </div>
         @endif
 
@@ -89,12 +59,13 @@
                 <table class="table align-items-center mb-0" id="myTable">
                     <thead>
                         <tr>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">รหัสสินค้า</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">ชื่อสินค้า
+
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                ชื่อประเภทสินค้า
                             </th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                ราคาปลีก/ส่ง</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">จำนวน</th>
+                                เวลาที่เพิ่ม</th>
+
                             <th></th>
                         </tr>
                     </thead>
@@ -102,32 +73,23 @@
                     <tbody>
 
 
-                        @foreach ($product as $item)
+                        @foreach ($typeCategory as $item)
                             <tr>
                                 <td>
                                     <div class="d-flex px-2">
                                         <div class="my-auto">
                                             <b>
-                                                {{ $item->id_product }}
+                                                {{ $item->name }}
                                             </b>
 
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <b>{{ $item->name }}</b>
+                                    <b>{{ $item->created_at }}</b>
 
                                 </td>
-                                <td>
-                                    <span class="badge badge-pill badge-lg bg-gradient-success">{{ $item->priceP }}</span>
-                                    <span class="badge badge-pill badge-lg bg-gradient-warning">{{ $item->priceS }}</span>
-                                </td>
-                                <td>
-                                    <b>
-                                        {{ $item->qty }}
-                                    </b>
 
-                                </td>
 
                                 <td class="align-middle">
                                     <button type="button" class="btn btn-secondary btn-sm bg-gradient-secondary mb-3  "
@@ -140,7 +102,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h6 class="modal-title font-weight-normal" id="modal-title-default">
-                                                        <b>จัดการสินค้า</b>
+                                                        <b>แก้ไขประเภทสินค้า</b>
                                                     </h6>
                                                     <button type="button" class="btn-close text-dark"
                                                         data-bs-dismiss="modal" aria-label="Close">
@@ -155,29 +117,12 @@
 
                                                                 <div class="col-12">
                                                                     <div class="input-group input-group-static mb-4">
-                                                                        <label><b>ชื่อสินค้า</b></label>
-                                                                        <input type="text" class="form-control">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <div class="input-group input-group-static mb-4">
-                                                                        <label><b>ราคาปลีก</b></label>
-                                                                        <input type="text" class="form-control">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <div class="input-group input-group-static mb-4">
-                                                                        <label><b>ราคาส่ง</b></label>
+                                                                        <label><b>ชื่อประเภทสินค้า</b></label>
                                                                         <input type="text" class="form-control">
                                                                     </div>
                                                                 </div>
 
-                                                                <div class="col-12">
-                                                                    <div class="input-group input-group-static mb-4">
-                                                                        <label><b>จำนวน</b></label>
-                                                                        <input type="text" class="form-control">
-                                                                    </div>
-                                                                </div>
+
                                                             </div>
 
                                                         </form>

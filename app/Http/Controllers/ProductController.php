@@ -1,19 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Categories;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use App\Models\Categories;
 
 class ProductController extends Controller
 {
     public function index()
     {
         $typeCategory = Categories::all();
-        $product = Product::paginate(10);
+        $product = Product::all();
 
-
-        return view('page.product.index',compact('typeCategory','product'));
+        return view('page.product.index', compact('typeCategory', 'product'));
     }
 
     public function store(Request $request)
@@ -30,6 +30,5 @@ class ProductController extends Controller
         return redirect()->route('product.index')->with('success', "บันทึกข้อมูลเรียบร้อย");
 
     }
-
 
 }

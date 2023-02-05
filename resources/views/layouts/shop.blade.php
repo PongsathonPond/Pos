@@ -5,10 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <title>
-        Material Dashboard 2 by Creative Tim
+        POS SYSTEM
     </title>
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css"
@@ -18,14 +16,28 @@
     <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <!-- CSS Files -->
     <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.0.4" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.12.1/datatables.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@100&display=swap" rel="stylesheet">
+    
 </head>
 
-<body class="g-sidenav-show  bg-gray-200">
+<body class="g-sidenav-show  bg-gray-400">
+    <style>
+        * {
+            font-family: 'Prompt', sans-serif;
+            font-weight: 500;
+        }
+    </style>
     <aside
         class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark"
         id="sidenav-main">
@@ -34,7 +46,7 @@
                 aria-hidden="true" id="iconSidenav"></i>
             <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard "
                 target="_blank">
-                <span class="ms-1 font-weight-bold text-white">Material Dashboard 2</span>
+                <span class="ms-1 font-weight-bold text-white">POS SYSTEM</span>
             </a>
         </div>
         <hr class="horizontal light mt-0 mb-2">
@@ -81,28 +93,51 @@
                 @endif
 
 
-                    <li class="nav-item mt-3">
-                        <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">จัดการสินค้า
+                    </h6>
+                </li>
+                @if (request()->routeIs('product.index'))
+                    <li class="nav-item">
+                        <a class="nav-link text-white active bg-gradient-success " href="{{ route('product.index') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">table_view</i>
+                            </div>
+                            <span class="nav-link-text ms-1">สินค้า</span>
+                        </a>
                     </li>
-                    @if (request()->routeIs('product.index'))
-                        <li class="nav-item">
-                            <a class="nav-link text-white active bg-gradient-success " href="{{ route('product.index') }}">
-                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="material-icons opacity-10">table_view</i>
-                                </div>
-                                <span class="nav-link-text ms-1">สินค้า</span>
-                            </a>
-                        </li>
-                    @else
-                        <li class="nav-item">
-                            <a class="nav-link text-white " href="{{ route('product.index') }}">
-                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="material-icons opacity-10">table_view</i>
-                                </div>
-                                <span class="nav-link-text ms-1">สินค้า</span>
-                            </a>
-                        </li>
-                    @endif
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link text-white " href="{{ route('product.index') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">table_view</i>
+                            </div>
+                            <span class="nav-link-text ms-1">สินค้า</span>
+                        </a>
+                    </li>
+                @endif
+
+                @if (request()->routeIs('product.category'))
+                    <li class="nav-item">
+                        <a class="nav-link text-white active bg-gradient-success "
+                            href="{{ route('product.category') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">table_view</i>
+                            </div>
+                            <span class="nav-link-text ms-1">จัดการประเภทสินค้า</span>
+                        </a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link text-white " href="{{ route('product.category') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">table_view</i>
+                            </div>
+                            <span class="nav-link-text ms-1">จัดการประเภทสินค้า</span>
+                        </a>
+                    </li>
+                @endif
+
 
 
             </ul>
@@ -170,8 +205,11 @@
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.12.1/datatables.min.js"></script>
+
+    @stack('js')
 </body>
 
 </html>

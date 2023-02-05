@@ -1,11 +1,11 @@
 @extends('layouts.shop')
 @section('content')
-    <div class="col-4 mt-2">
+    <div class="col-3 mt-2">
         <div class="card">
             <div class="card-header p-3 pt-2">
                 <div
                     class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                    <i class="material-icons opacity-10">person</i>
+                    <i class="material-icons opacity-10">storefront</i>
                 </div>
                 <div class="text-end pt-1">
                     <p class="text-sm mb-0 text-capitalize">สแกนบาร์โค้ด</p>
@@ -14,9 +14,9 @@
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
 
-                          <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
 
-                        @csrf
+                    @csrf
                     <div class="input-group input-group-static mb-4">
                         <input type="text" class="form-control" name="name" id="inputkey" placeholder="BARCODE ID">
                     </div>
@@ -41,7 +41,7 @@
 
     </div>
 
-    <div class="col-8 mt-2">
+    <div class="col-9 mt-2">
 
         <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
@@ -59,7 +59,7 @@
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                     จำนวน</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    ราคา</th>
+                                    ราคาต่อชิ้น</th>
 
                                 <th class="text-secondary opacity-7"></th>
                             </tr>
@@ -89,7 +89,8 @@
                                             @csrf
                                             <input type="hidden" value="{{ $item->id }}" name="id">
 
-                                            <button  class="btn bg-gradient-danger btn-sm"> <i class="fas fa-trash"></i></button>
+                                            <button class="btn bg-gradient-danger btn-sm"> <i
+                                                    class="fas fa-trash"></i></button>
                                         </form>
 
                                     </td>
@@ -97,16 +98,92 @@
                             @endforeach
                         </tbody>
                     </table>
-                    Total: ${{ Cart::getTotal() }}
+
                 </div>
             </div>
+            <div class="card-body ">
+
+                <div class="row">
+                    <div class="col-4">
+                        <div class="input-group input-group-static mb-4">
+                            <label>
+                                <h4>จำนวนเงินที่รับ</h4>
+                            </label>
+                            <input type="text" class="form-control" name="name" id="num2"
+                                style="color: rgb(19, 23, 235)" placeholder="ยอดเงิน" required>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="input-group input-group-static mb-4">
+                            <label>
+                                <h4>ประเภทการชำระ</h4>
+                            </label>
+                            <div class="input-group input-group-static mb-1">
+                                <select class="form-control" id="exampleFormControlSelect1" name="category_id"
+                                    style="color: rgb(19, 23, 235)">
+                                    <option>กรุณาเลือกประเภท</option>
+                                    <option value="เงินสด"><b>เงินสด</b></option>
+                                    <option value="โอนผ่านบัญชีธนาคาร"><b>โอนผ่านบัญชีธนาคาร</b></option>
+                                    <option value="ค้างชำระ"><b>ค้างชำระ</b></option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group input-group-static mb-4">
+                            <label>
+                                <h4>รหัสผู้ค้างชำระ</h4>
+                            </label>
+                            <input type="text" class="form-control" name="name" id="inputkey"
+                                style="color: rgb(19, 23, 235)" placeholder="กรณีเลือกประเภทเป็นค้างชำระเท่านั้น" required>
+                        </div>
+                    </div>
+
+                </div>
+                <input type="hidden" class="btn btn-success " id="num1" value=" {{ Cart::getTotal() }}">
+                <h4> ยอดรวม : <span
+                        class="badge badge-pill badge-lg bg-gradient-success">{{ number_format(Cart::getTotal(), 2, '.', ',') }}</span>
+                    บาท
+                </h4>
+
+                <div class="row">
+
+                    <h4> เงินทอน : <span class="badge badge-pill badge-lg bg-gradient-secondary">
+                            <input class="form-control" style="color: rgb(255, 255, 255) ;font-size:1vw;width:120px"
+                                id="answer" readonly> </span>
+
+                        <a class="badge badge-pill badge-lg bg-gradient-secondary" style="font-size:1vw"
+                            onclick="calculate()"> คำนวณ </a>
+
+                    </h4>
+
+
+
+
+
+                </div>
+
+            </div>
         </div>
-    </div>
 
-    <script>
-        window.onload = function() {
-            document.getElementById("inputkey").focus();
-        }
-    </script>
+        <script>
+            window.onload = function() {
+                document.getElementById("inputkey").focus();
+            }
+        </script>
+        <script>
+            function calculate() {
+                var field1 = document.getElementById("num1").value;
+                var field = document.getElementById("num2").value;
+                var result = parseFloat(field) - parseFloat(field1);
 
-@endsection
+                if (!isNaN(result)) {
+                    document.getElementById("answer").value = result;
+
+
+                }
+            }
+        </script>
+    @endsection
