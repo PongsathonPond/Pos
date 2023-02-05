@@ -89,12 +89,12 @@
                 <table class="table align-items-center mb-0" id="myTable">
                     <thead>
                         <tr>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">รหัสสินค้า</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">ชื่อสินค้า
+                            <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7">รหัสสินค้า</th>
+                            <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">ชื่อสินค้า
                             </th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                            <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
                                 ราคาปลีก/ส่ง</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">จำนวน</th>
+                            <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">จำนวน</th>
                             <th></th>
                         </tr>
                     </thead>

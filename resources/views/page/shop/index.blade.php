@@ -28,16 +28,33 @@
 
         <br><br>
         @if (session('success'))
-            <div class="alert alert-success" role="alert">
-                <strong>สำเร็จ !</strong> เพิ่มสินค้าลงในรายการขายเรียบร้อย
+
+            <div class="alert alert-success alert-dismissible text-white fade show" role="alert">
+                <span class="alert-text">  <strong>สำเร็จ !</strong> เพิ่มสินค้าลงในรายการขายเรียบร้อย</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         @endif
 
         @if (session('error'))
-            <div class="alert alert-danger" role="alert">
-                <strong>พบข้อผิดพลาด !</strong> ไม่พบสินค้าในฐานข้อมูล
+            <div class="alert alert-danger alert-dismissible text-white fade show" role="alert">
+                <span class="alert-text">  <strong>พบข้อผิดพลาด !</strong> ไม่พบสินค้าในฐานข้อมูล</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         @endif
+
+        @if (session('delete'))
+            <div class="alert alert-warning alert-dismissible text-white fade show" role="alert">
+                <span class="alert-text">  <strong>สำเร็จ !</strong> ลบสินค้าออกจากรายการขายเรียบร้อย</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
 
     </div>
 
@@ -54,11 +71,11 @@
                     <table class="table align-items-center mb-0">
                         <thead>
                             <tr>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ชื่อสินค้า
+                                <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7">ชื่อสินค้า
                                 </th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                <th class="text-uppercase text-secondary text-1xl font-weight-bolder opacity-7 ps-2">
                                     จำนวน</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                <th class="text-center text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7">
                                     ราคาต่อชิ้น</th>
 
                                 <th class="text-secondary opacity-7"></th>
@@ -71,17 +88,20 @@
                                         <div class="d-flex px-2 py-1">
 
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">{{ $item->name }}</h6>
+                                                <h6 class="mb-0 ">{{ $item->name }}</h6>
 
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0"> {{ $item->quantity }}</p>
+                                        <h6 class="mb-0 ">{{ $item->quantity }}</h6>
+
 
                                     </td>
                                     <td class="align-middle text-center text-sm">
-                                        <span class="badge badge-sm bg-gradient-success">{{ $item->price }}</span>
+
+
+                                        <span class="badge badge-pill badge-lg bg-gradient-success text-1xl" >    <h5 class="mb-0 " style="color: white">{{ $item->price }}</h5></span>
                                     </td>
 
                                     <td class="align-middle">
@@ -122,7 +142,7 @@
                             <div class="input-group input-group-static mb-1">
                                 <select class="form-control" id="exampleFormControlSelect1" name="category_id"
                                     style="color: rgb(19, 23, 235)">
-                                    <option>กรุณาเลือกประเภท</option>
+
                                     <option value="เงินสด"><b>เงินสด</b></option>
                                     <option value="โอนผ่านบัญชีธนาคาร"><b>โอนผ่านบัญชีธนาคาร</b></option>
                                     <option value="ค้างชำระ"><b>ค้างชำระ</b></option>

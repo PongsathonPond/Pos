@@ -61,7 +61,7 @@ class CartController extends Controller
     public function removeCart(Request $request)
     {
         \Cart::remove($request->id);
-        session()->flash('success', 'Item Cart Remove Successfully !');
+        session()->flash('delete', 'Item Cart Remove Successfully !');
 
         return redirect()->route('shopP');
     }
