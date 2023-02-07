@@ -55,6 +55,15 @@
             </div>
         @endif
 
+        @if (session('update'))
+            <div class="alert alert-warning alert-dismissible text-white fade show" role="alert">
+                <span class="alert-text">  <strong>สำเร็จ !</strong> อัพเดทจำนวนเรียบร้อย</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
 
     </div>
 
@@ -94,8 +103,13 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <h6 class="mb-0 ">{{ $item->quantity }}</h6>
-
+{{--                                        <h6 class="mb-0 ">{{ $item->quantity }}</h6>--}}
+                                        <form action="{{ route('cart.update') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $item->id}}" >
+                                            <input type="number" name="quantity"  style="width: 50px;border-style: none"  value="{{ $item->quantity }}"/>
+                                            <button type="submit" class="btn bg-gradient-secondary btn-sm " style="margin-top: 3%">update</button>
+                                        </form>
 
                                     </td>
                                     <td class="align-middle text-center text-sm">
@@ -105,14 +119,19 @@
                                     </td>
 
                                     <td class="align-middle">
-                                        <form action="{{ route('cart.remove') }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" value="{{ $item->id }}" name="id">
+{{--                                        <form action="{{ route('cart.remove') }}" method="POST">--}}
+{{--                                            @csrf--}}
+{{--                                            <input type="hidden" value="{{ $item->id }}" name="id">--}}
 
-                                            <button class="btn bg-gradient-danger btn-sm"> <i
-                                                    class="fas fa-trash"></i></button>
-                                        </form>
+{{--                                            <button class="btn bg-gradient-danger btn-sm"> <i--}}
+{{--                                                    class="fas fa-trash"></i></button>--}}
+{{--                                        </form>--}}
+{{--                                        --}}
+                                        <a class="px-4 py-2 text-white bg-red-600"
+                                           onclick="testone('{{ $item->id }}')">XXXXXX</a>
 
+
+                                        {{$item->id}}
                                     </td>
                                 </tr>
                             @endforeach
@@ -170,7 +189,7 @@
 
                 <div class="row">
 
-                    <h4> เงินทอน : <span class="badge badge-pill badge-lg bg-gradient-secondary">
+                    <h4 > เงินทอน : <span class="badge badge-pill badge-lg bg-gradient-secondary">
                             <input class="form-control" style="color: rgb(255, 255, 255) ;font-size:1vw;width:120px"
                                 id="answer" readonly> </span>
 
@@ -204,6 +223,23 @@
 
 
                 }
+            }
+
+            function testone(ele) {
+                let data = {
+                    '_token': $('meta[name="csrf-token"]').attr('content'),
+                    'id': ele
+                }
+
+                console.log(data)
+                $.ajax({
+                    type: 'post',
+                    url: "{{ route('cart.remove') }}",
+                    data: data,
+                    success: function() {
+                        location.reload();
+                    }
+                })
             }
         </script>
     @endsection

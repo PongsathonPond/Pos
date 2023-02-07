@@ -53,13 +53,15 @@ class CartController extends Controller
             ]
         );
 
-        session()->flash('success', 'Item Cart is Updated Successfully !');
+        session()->flash('update', 'Item Cart is Updated Successfully !');
 
         return redirect()->route('shopP');
     }
 
     public function removeCart(Request $request)
     {
+
+
         \Cart::remove($request->id);
         session()->flash('delete', 'Item Cart Remove Successfully !');
 

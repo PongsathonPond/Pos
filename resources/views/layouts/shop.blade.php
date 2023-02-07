@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>
         POS SYSTEM
     </title>
@@ -21,6 +22,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
     <!-- CSS Files -->
     <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.0.4" rel="stylesheet" />
     <link rel="stylesheet" type="text/css"
@@ -28,7 +30,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@100&display=swap" rel="stylesheet">
-    
+
 </head>
 
 <body class="g-sidenav-show  bg-gray-400">
@@ -103,7 +105,7 @@
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="material-icons opacity-10">table_view</i>
                             </div>
-                            <span class="nav-link-text ms-1">สินค้า</span>
+                            <span class="nav-link-text ms-1 " >สินค้า</span>
                         </a>
                     </li>
                 @else
