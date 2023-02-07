@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Category;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ListAll;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,5 +42,7 @@ Route::middleware([
 
     Route::get('/category', [Category::class, 'index'])->name('product.category');
     Route::post('/category/store', [Category::class, 'store'])->name('category_store');
+
+    Route::post('/list/store', [ListAll::class, 'store'])->name('list');
 
 });

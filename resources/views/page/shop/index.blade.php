@@ -92,7 +92,9 @@
                         </thead>
                         <tbody>
                             @foreach ($cartItems as $item)
+
                                 <tr>
+
                                     <td>
                                         <div class="d-flex px-2 py-1">
 
@@ -103,37 +105,41 @@
                                         </div>
                                     </td>
                                     <td>
-{{--                                        <h6 class="mb-0 ">{{ $item->quantity }}</h6>--}}
-                                        <form action="{{ route('cart.update') }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="id" value="{{ $item->id}}" >
-                                            <input type="number" name="quantity"  style="width: 50px;border-style: none"  value="{{ $item->quantity }}"/>
-                                            <button type="submit" class="btn bg-gradient-secondary btn-sm " style="margin-top: 3%">update</button>
-                                        </form>
+
+                                        <a class="btn bg-gradient-danger btn-sm mt-3"
+                                           onclick="testtwo('{{ $item->id }}','{{$item->quantity}}')"><i
+                                                class="fas fa-trash"></i></a>
+
+{{--                                        <form action="{{ route('cart.update') }}" method="POST">--}}
+{{--                                            @csrf--}}
+{{--                                            <input type="hidden"  value="{{ $item->id}}" >--}}
+{{--                                            <input type="number"   style="width: 50px;border-style: none"  value="{{ $item->quantity }}"/>--}}
+{{--                                            <button type="submit" class="btn bg-gradient-secondary btn-sm " style="margin-top: 3%">update</button>--}}
+{{--                                        </form>--}}
 
                                     </td>
                                     <td class="align-middle text-center text-sm">
-
-
                                         <span class="badge badge-pill badge-lg bg-gradient-success text-1xl" >    <h5 class="mb-0 " style="color: white">{{ $item->price }}</h5></span>
                                     </td>
-
                                     <td class="align-middle">
-{{--                                        <form action="{{ route('cart.remove') }}" method="POST">--}}
-{{--                                            @csrf--}}
-{{--                                            <input type="hidden" value="{{ $item->id }}" name="id">--}}
 
-{{--                                            <button class="btn bg-gradient-danger btn-sm"> <i--}}
-{{--                                                    class="fas fa-trash"></i></button>--}}
-{{--                                        </form>--}}
-{{--                                        --}}
-                                        <a class="px-4 py-2 text-white bg-red-600"
-                                           onclick="testone('{{ $item->id }}')">XXXXXX</a>
+                                        <a class="btn bg-gradient-danger btn-sm mt-3"
+                                           onclick="testone('{{ $item->id }}')"><i
+                                                class="fas fa-trash"></i></a>
 
-
-                                        {{$item->id}}
                                     </td>
+                                    <form action="{{ route('list') }}" method="post" id="formsub">
+                                        @csrf
+
+                                        <input type="hidden"  name="name[]" value="{{ $item->name }}">
+                                        <input type="hidden" name="quantity[]" value="{{ $item->quantity }}">
+                                        <input type="hidden" name="price[]" value=" {{ $item->price }}">
+
+
                                 </tr>
+
+
+
                             @endforeach
                         </tbody>
                     </table>
@@ -148,7 +154,7 @@
                             <label>
                                 <h4>จำนวนเงินที่รับ</h4>
                             </label>
-                            <input type="text" class="form-control" name="name" id="num2"
+                            <input type="text" class="form-control" name="test1" id="num2"
                                 style="color: rgb(19, 23, 235)" placeholder="ยอดเงิน" required>
                         </div>
                     </div>
@@ -159,7 +165,7 @@
                                 <h4>ประเภทการชำระ</h4>
                             </label>
                             <div class="input-group input-group-static mb-1">
-                                <select class="form-control" id="exampleFormControlSelect1" name="category_id"
+                                <select class="form-control" id="exampleFormControlSelect1" name="test2"
                                     style="color: rgb(19, 23, 235)">
 
                                     <option value="เงินสด"><b>เงินสด</b></option>
@@ -175,13 +181,13 @@
                             <label>
                                 <h4>รหัสผู้ค้างชำระ</h4>
                             </label>
-                            <input type="text" class="form-control" name="name" id="inputkey"
+                            <input type="text" class="form-control" name="test3" id="inputkey"
                                 style="color: rgb(19, 23, 235)" placeholder="กรณีเลือกประเภทเป็นค้างชำระเท่านั้น" required>
                         </div>
                     </div>
 
                 </div>
-                <input type="hidden" class="btn btn-success " id="num1" value=" {{ Cart::getTotal() }}">
+                <input type="hidden" class="btn btn-success " name="test4" id="num1" value=" {{ Cart::getTotal() }}">
                 <h4> ยอดรวม : <span
                         class="badge badge-pill badge-lg bg-gradient-success">{{ number_format(Cart::getTotal(), 2, '.', ',') }}</span>
                     บาท
@@ -191,13 +197,19 @@
 
                     <h4 > เงินทอน : <span class="badge badge-pill badge-lg bg-gradient-secondary">
                             <input class="form-control" style="color: rgb(255, 255, 255) ;font-size:1vw;width:120px"
-                                id="answer" readonly> </span>
+                                id="answer" name="test5" readonly> </span>
 
                         <a class="badge badge-pill badge-lg bg-gradient-secondary" style="font-size:1vw"
                             onclick="calculate()"> คำนวณ </a>
 
                     </h4>
 
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-success " onclick="sendform()"
+                                style="margin-left: 5%;float: right;padding: 20px 24px;">ออกใบเสร็จ</button>
+
+                    </div>
+                    </form>
 
 
 
@@ -231,7 +243,7 @@
                     'id': ele
                 }
 
-                console.log(data)
+
                 $.ajax({
                     type: 'post',
                     url: "{{ route('cart.remove') }}",
@@ -240,6 +252,17 @@
                         location.reload();
                     }
                 })
+            }
+            function testtwo(ele,test) {
+
+                console.log(ele)
+                console.log(test)
+            }
+
+            function sendform() {
+                formsub.submit();
+
+
             }
         </script>
     @endsection
