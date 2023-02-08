@@ -131,7 +131,7 @@
                                     <form action="{{ route('list') }}" method="post" id="formsub">
                                         @csrf
 
-                                        <input type="hidden"  name="name[]" value="{{ $item->name }}">
+                                        <input type="hidden"  name="product_id[]" value="{{ $item->id }}">
                                         <input type="hidden" name="quantity[]" value="{{ $item->quantity }}">
                                         <input type="hidden" name="price[]" value=" {{ $item->price }}">
 
@@ -154,7 +154,7 @@
                             <label>
                                 <h4>จำนวนเงินที่รับ</h4>
                             </label>
-                            <input type="text" class="form-control" name="test1" id="num2"
+                            <input type="text" class="form-control" name="amount" id="num2"
                                 style="color: rgb(19, 23, 235)" placeholder="ยอดเงิน" required>
                         </div>
                     </div>
@@ -165,7 +165,7 @@
                                 <h4>ประเภทการชำระ</h4>
                             </label>
                             <div class="input-group input-group-static mb-1">
-                                <select class="form-control" id="exampleFormControlSelect1" name="test2"
+                                <select class="form-control" id="exampleFormControlSelect1" name="type_sale"
                                     style="color: rgb(19, 23, 235)">
 
                                     <option value="เงินสด"><b>เงินสด</b></option>
@@ -187,7 +187,7 @@
                     </div>
 
                 </div>
-                <input type="hidden" class="btn btn-success " name="test4" id="num1" value=" {{ Cart::getTotal() }}">
+                <input type="hidden" class="btn btn-success " name="total_price" id="num1" value=" {{ Cart::getTotal() }}">
                 <h4> ยอดรวม : <span
                         class="badge badge-pill badge-lg bg-gradient-success">{{ number_format(Cart::getTotal(), 2, '.', ',') }}</span>
                     บาท
@@ -197,7 +197,7 @@
 
                     <h4 > เงินทอน : <span class="badge badge-pill badge-lg bg-gradient-secondary">
                             <input class="form-control" style="color: rgb(255, 255, 255) ;font-size:1vw;width:120px"
-                                id="answer" name="test5" readonly> </span>
+                                id="answer" name="change" readonly> </span>
 
                         <a class="badge badge-pill badge-lg bg-gradient-secondary" style="font-size:1vw"
                             onclick="calculate()"> คำนวณ </a>

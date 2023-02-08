@@ -53,11 +53,12 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
-        Schema::create('order_product', function (Blueprint $table) {
+        Schema::create('order_products', function (Blueprint $table) {
             $table->unsignedBigInteger('order_id');
             $table->string('product_id');
             $table->integer('quantity');
             $table->decimal('price', 10, 2);
+            $table->timestamps();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('product_id')->references('id_product')->on('products')->onDelete('cascade');
         });
