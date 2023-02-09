@@ -36,8 +36,7 @@ class ListAll extends Controller
 
 
 
-        return redirect()->route('product.index')->with('success', "บันทึกข้อมูลเรียบร้อย");
-
+        return redirect()->route('shopP')->with('ok', 'addlistall!');;
 
     }
 }

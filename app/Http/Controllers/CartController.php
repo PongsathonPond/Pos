@@ -11,7 +11,11 @@ class CartController extends Controller
     {
         $cartItems = \Cart::getContent();
 
-        return view('page.shop.index', compact('cartItems'));
+        $listall = DB::table('orders')
+       ->orderBy('id', 'desc')
+       ->paginate(4);
+
+        return view('page.shop.index', compact('cartItems','listall'));
     }
 
     public function addToCart(Request $request)

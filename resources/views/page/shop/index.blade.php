@@ -26,7 +26,72 @@
 
 
 
+        <br>
+
+        <div class="card">
+            <div class="card-header p-3 pt-2">
+                <div
+                    class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+                    <i class="material-icons opacity-10">storefront</i>
+                </div>
+                <div class="text-end pt-1">
+                    <p class="text-sm mb-0 text-capitalize">ใบเสร็จล่าสุด</p>
+                </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+                <div class="card">
+                    <div class="table-responsive">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                            <tr>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">รหัสใบเสร็จ</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ออกใบเสร็จ</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($listall as $item)
+
+                            <tr>
+                                <td>
+                                    <div class="d-flex px-2 py-1">
+                                        <div>
+                                             {{$item->total_price}}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+
+                                    <button type="button" class="btn btn-success">
+                                        <i class="fas fa-print"></i>
+                                    </button>
+                                </td>
+
+
+                            </tr>
+                            @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
         <br><br>
+
+
+        @if (session('ok'))
+
+            <div class="alert alert-success alert-dismissible text-white fade show" role="alert">
+                <span class="alert-text">  <strong>สำเร็จ !</strong> เพิ่มรายการขายเรียบร้อย</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
         @if (session('success'))
 
             <div class="alert alert-success alert-dismissible text-white fade show" role="alert">
@@ -36,7 +101,6 @@
                 </button>
             </div>
         @endif
-
         @if (session('error'))
             <div class="alert alert-danger alert-dismissible text-white fade show" role="alert">
                 <span class="alert-text">  <strong>พบข้อผิดพลาด !</strong> ไม่พบสินค้าในฐานข้อมูล</span>
@@ -45,7 +109,6 @@
                 </button>
             </div>
         @endif
-
         @if (session('delete'))
             <div class="alert alert-warning alert-dismissible text-white fade show" role="alert">
                 <span class="alert-text">  <strong>สำเร็จ !</strong> ลบสินค้าออกจากรายการขายเรียบร้อย</span>
@@ -54,7 +117,6 @@
                 </button>
             </div>
         @endif
-
         @if (session('update'))
             <div class="alert alert-warning alert-dismissible text-white fade show" role="alert">
                 <span class="alert-text">  <strong>สำเร็จ !</strong> อัพเดทจำนวนเรียบร้อย</span>
