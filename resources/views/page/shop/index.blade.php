@@ -1,3 +1,4 @@
+@inject('thaiconvert', 'App\Services\ThaiDateHelperService')
 @extends('layouts.shop')
 @section('content')
     <div class="col-3 mt-2">
@@ -61,7 +62,8 @@
                                 <td>
                                     <div class="d-flex px-2 py-1">
                                         <div>
-                                            {{$item->created_at}}
+
+                                            {{ $thaiconvert->simpleDateFormat($item->created_at) }}
                                         </div>
                                     </div>
                                 </td>
