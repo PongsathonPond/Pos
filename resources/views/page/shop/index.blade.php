@@ -32,7 +32,7 @@
             <div class="card-header p-3 pt-2">
                 <div
                     class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                    <i class="material-icons opacity-10">storefront</i>
+                    <i class="material-icons opacity-10">print</i>
                 </div>
                 <div class="text-end pt-1">
                     <p class="text-sm mb-0 text-capitalize">ใบเสร็จล่าสุด</p>
@@ -45,26 +45,39 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                             <tr>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">รหัสใบเสร็จ</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">วันที่ขาย</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ออกใบเสร็จ</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">รหัสใบเสร็จ</th>
+
+
+
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($listall as $item)
 
                             <tr>
+
                                 <td>
                                     <div class="d-flex px-2 py-1">
                                         <div>
-                                             {{$item->total_price}}
+                                            {{$item->created_at}}
                                         </div>
                                     </div>
                                 </td>
+
                                 <td>
 
-                                    <button type="button" class="btn btn-success">
-                                        <i class="fas fa-print"></i>
-                                    </button>
+                                        <a   href="{{ URL::to('generate-pdf/' . $item->id) }}"
+                                           target="_blank"  class="text-danger"> ออกใบเสร็จ <i class="fas fa-print"></i></a>
+
+                                </td>
+                                <td>
+                                    <div class="d-flex px-2 py-1">
+                                        <div>
+                                            {{$item->total_price}}
+                                        </div>
+                                    </div>
                                 </td>
 
 

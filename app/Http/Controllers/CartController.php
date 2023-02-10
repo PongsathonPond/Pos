@@ -10,11 +10,9 @@ class CartController extends Controller
     public function cartList()
     {
         $cartItems = \Cart::getContent();
-
         $listall = DB::table('orders')
        ->orderBy('id', 'desc')
-       ->paginate(4);
-
+       ->paginate(1);
         return view('page.shop.index', compact('cartItems','listall'));
     }
 

@@ -5,7 +5,7 @@ use App\Http\Controllers\Category;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ListAll;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PDFController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,4 +45,5 @@ Route::middleware([
 
     Route::post('/list/store', [ListAll::class, 'store'])->name('list');
 
+    Route::get('generate-pdf/{id}', [PDFController::class, 'generatePDF1'])->name('showpdf');
 });
