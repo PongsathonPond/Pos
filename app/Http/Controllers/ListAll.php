@@ -11,6 +11,18 @@ class ListAll extends Controller
 {
     public function store(Request $request)
     {
+
+        $request->validate([
+            'amount' => 'required',
+            'change' => 'required',
+        ],
+            [
+                'amount.required' => "กรุณาใส่จำนวนเงินที่รับ",
+                'change.required' => "กรุณากดคำนวณเงินทอน",
+            ],
+
+        );
+
         $tableName = new Orders();
         $tableName->user_id = Auth::user()->id;;
         $tableName->total_price = $request->total_price;

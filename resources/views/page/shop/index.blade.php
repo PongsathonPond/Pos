@@ -232,7 +232,12 @@
                                 <h4>จำนวนเงินที่รับ</h4>
                             </label>
                             <input type="text" class="form-control" name="amount" id="num2"
-                                style="color: rgb(19, 23, 235)" placeholder="ยอดเงิน" required>
+                                style="color: rgb(19, 23, 235)" placeholder="ยอดเงิน" >
+                            @error('amount')
+                            <div class="my-2">
+                                <span class="text-danger my-2"> {{ $message }} </span>
+                            </div>
+                            @enderror
                         </div>
                     </div>
 
@@ -259,7 +264,7 @@
                                 <h4>รหัสผู้ค้างชำระ</h4>
                             </label>
                             <input type="text" class="form-control" name="test3" id="inputkey"
-                                style="color: rgb(19, 23, 235)" placeholder="กรณีเลือกประเภทเป็นค้างชำระเท่านั้น" required>
+                                style="color: rgb(19, 23, 235)" placeholder="กรณีเลือกประเภทเป็นค้างชำระเท่านั้น" >
                         </div>
                     </div>
 
@@ -275,12 +280,15 @@
                     <h4 > เงินทอน : <span class="badge badge-pill badge-lg bg-gradient-secondary">
                             <input class="form-control" style="color: rgb(255, 255, 255) ;font-size:1vw;width:120px"
                                 id="answer" name="change" readonly> </span>
-
                         <a class="badge badge-pill badge-lg bg-gradient-secondary" style="font-size:1vw"
                             onclick="calculate()"> คำนวณ </a>
 
                     </h4>
-
+                    @error('change')
+                    <div class="my-2">
+                        <span class="text-danger my-2"> {{ $message }} </span>
+                    </div>
+                    @enderror
                     <div class="col-6">
                         <button type="submit" class="btn btn-success " onclick="sendform()"
                                 style="margin-left: 5%;float: right;padding: 20px 24px;">ออกใบเสร็จ</button>
@@ -291,7 +299,9 @@
 
 
 
+
                 </div>
+
 
             </div>
         </div>
