@@ -46,9 +46,9 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                             <tr>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">วันที่ขาย</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ออกใบเสร็จ</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">รหัสใบเสร็จ</th>
+                                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7"><b>วันที่ขาย</b></th>
+                                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7"><b>ออกใบเสร็จ</b></th>
+                                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7"><b>รหัสใบเสร็จ</b></th>
 
 
 
@@ -70,8 +70,20 @@
 
                                 <td>
 
-                                        <a   href="{{ URL::to('generate-pdf/' . $item->id) }}"
-                                           target="_blank"  class="text-danger"> ออกใบเสร็จ <i class="fas fa-print"></i></a>
+                                    <button type="button" class="btn btn-outline-info" onclick="printreceiptContent('print')">
+                                         <i class="fas fa-print"></i>
+                                    </button>
+                                    <div class="modal">
+                                        <div id="print">
+                                            @include('page.export.index')
+                                        </div>
+                                    </div>
+
+{{--                                        <a   href="{{ URL::to('generate-pdf/' . $item->id) }}"--}}
+{{--                                           target="_blank"  class="text-danger" > ออกใบเสร็จ <i class="fas fa-print"></i></a>--}}
+
+
+
 
                                 </td>
                                 <td>
@@ -311,7 +323,26 @@
                 document.getElementById("inputkey").focus();
             }
         </script>
+
+
         <script>
+            function printreceiptContent(el){
+                var data =
+                    '<input type="button" id= "printPageButton" class="printPageButton" style="display: block; width:100%; border:none; background-color:#008B8B; color:#fff; padding:14px 28px; font-size:16px;cursor:pointer;text-align:center;" value="Print Receipt" onClick="window.print()">';
+                data += document.getElementById(el).innerHTML;
+                myReceipt = window.open("","myWin","left=50,top=50,width=400,height=400");
+                myReceipt.screnX = 0;
+                myReceipt.screnY = 0;
+                myReceipt.document.write(data);
+                myReceipt.document.title = "พิมพ์ใบเสร็จรับเงิน";
+                myReceipt.focus();
+
+
+            }
+        </script>
+        <script>
+
+
             function calculate() {
                 var field1 = document.getElementById("num1").value;
                 var field = document.getElementById("num2").value;

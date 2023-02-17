@@ -22,9 +22,9 @@ class PDFController extends Controller
 
         // download PDF file with download method
         // return $pdf->download('pdf_file.pdf');
-        return $pdf->stream('pdf_file.pdf');
+//        return $pdf->stream('pdf_file.pdf');
 
-//        return view('page.export.index');
+     return view('page.export.index');
 
     }
 }
