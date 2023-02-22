@@ -152,7 +152,15 @@
                 </button>
             </div>
         @endif
-
+        @if (session('deleteall'))
+        <div class="alert alert-warning alert-dismissible text-white fade show" role="alert">
+            <span class="alert-text">  <strong>สำเร็จ !</strong> ลบข้อมูลทั้งหมดเรียบร้อย</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+       
 
     </div>
 
@@ -200,15 +208,13 @@
 
                                      
 
-                                       <form action="{{ route('cart.update') }}" method="POST">
-                                           @csrf
-                                            <input type="hidden"  value="{{ $item->id}}" >
+                                    
                                            <input type="number"   style="width: 50px;border-style: none"  id="updateinput{{$index}}" value="{{ $item->quantity }}"/>
                                    
                                           <a class="btn bg-gradient-secondary btn-sm"
                                           onclick="testtwo('{{ $item->id }}','{{$index}}')"><i
                                                class="fa fa-refresh"></i></a>
-                                      </form> 
+                                     
 
                                     </td>
                                     <td class="align-middle text-center text-sm">
@@ -223,10 +229,9 @@
                                     </td>
                                     <form action="{{ route('list') }}" method="post" id="formsub">
                                         @csrf
-
+                                        <input type="hidden" name="id[]" value="{{ $item->id }}">
                                         <input type="hidden"  name="product_id[]" value="{{ $item->id }}">
                                         <input type="hidden"  name="listall[]" value="{{ $item->name }}">
-                                        
                                         <input type="hidden" name="quantity[]" value="{{ $item->quantity }}">
                                         <input type="hidden" name="price[]" value=" {{ $item->price }}">
 
@@ -301,9 +306,9 @@
                     <h4 > เงินทอน : <span class="badge badge-pill badge-lg bg-gradient-secondary">
                             <input class="form-control" style="color: rgb(255, 255, 255) ;font-size:1vw;width:120px"
                                 id="answer" name="change" readonly> </span>
-                     
-
                     </h4>
+
+                    
                     @error('change')
                     <div class="my-2">
                         <span class="text-danger my-2"> {{ $message }} </span>
@@ -314,8 +319,17 @@
                                 style="margin-left: 5%;float: right;padding: 20px 24px;">ออกใบเสร็จ</button>
 
                     </div>
+                   
                     </form>
+                    <div class="col-6">
+                        <form action="{{ route('cart.clear') }}" method="POST">
+                            @csrf
+                            <button class="btn btn-danger"
+                                style="padding: 20px 24px;">ล้างข้อมูลทั้งหมด</button>
 
+
+                        </form>
+                    </div>
 
 
 

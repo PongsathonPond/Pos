@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Orders;
 use App\Models\Order_product;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -23,8 +24,9 @@ class ListAll extends Controller
             ],
 
         );
-
+   
         $tableName = new Orders();
+
         $tableName->user_id = Auth::user()->id;;
         $tableName->total_price = $request->total_price;
         $tableName->type_sale = $request->type_sale;
@@ -51,7 +53,22 @@ class ListAll extends Controller
             $table->save();
         }
 
+     
+  
+        for ($i = 0; $i < count($request->id); $i++) {
+            // $product1 = Product::find('1');
+            // dd( $product1);
+            $product1 = Product::where('id_product',$request->id[$i])->first();
+            $sumtotal = $product1->qty;
 
+            Product::where('id_product',$request->id[$i])->
+            update([
+
+            'qty' => $sumtotal - $request->quantity[$i],
+        ]);
+
+        
+        }
 
         return redirect()->route('shopP')->with('ok', 'addlistall!');;
 

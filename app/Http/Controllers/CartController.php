@@ -78,7 +78,7 @@ class CartController extends Controller
     {
         \Cart::clear();
 
-        session()->flash('success', 'All Item Cart Clear Successfully !');
+        session()->flash('deleteall', 'All Item Cart Clear Successfully !');
 
         return redirect()->route('shopP');
     }

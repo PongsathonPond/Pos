@@ -41,9 +41,9 @@
             line-height: 2em;
         }
         #invoice-POS p {
-            font-size: .7em;
+            font-size: .8em;
             color: #000000;
-            line-height: 1.2em;
+            line-height: 1.4em;
         }
         #invoice-POS #top, #invoice-POS #mid, #invoice-POS #bot {
             /* Targets all id with 'col-' */
@@ -87,8 +87,8 @@
             border-collapse: collapse;
         }
         #invoice-POS .tabletitle {
-            font-size: .5em;
-            background: #EEE;
+            font-size: .7em;
+            background: #fffcfc;
         }
         #invoice-POS .service {
             border-bottom: 1px solid #EEE;
@@ -128,17 +128,16 @@
     <center id="top">
     
        
-            <h1>SBISTechs Inc</h1>
-       
+            <h2>ใบเสร็จรับเงินร้าน</h2>
+            <h2> ส.พานิชย์</h2>
     </center><!--End InvoiceTop-->
 
     <div id="mid">
         <div class="info">
             <h2>ช่องทางติดต่อ</h2>
             <p>
-                Address : street city, state 0000</br>
-                Email   : JohnDoe@gmail.com</br>
-                Phone   : 555-555-5555</br>
+                137 หมู่ 6 ตำบล มะเกลือใหม่ อ.สูงเนิน จ.นครราชสีมา 30170</br>
+                โทรศัพท์   : 090-2382762</br>
             </p>
         </div>
     </div><!--End Invoice Mid-->
@@ -153,32 +152,22 @@
                     <td class="Rate"><h2>ราคา</h2></td>
                 </tr>
 
-                @php
-                                                                                    
+                @php                                                                 
                 $i = 0;
                 $j = 0;
-                
-            @endphp
+                 @endphp
+
 
                 @foreach($order_receipt as $item)
-                
-                @foreach($item->listall as $row)
-
+                @foreach($item->listall as $key =>$row)
                 <tr class="service">
-                    <td class="tableitem"><p class="itemtext">{{$row}}</p></td>
-                    <td class="tableitem"><p class="itemtext"> </p></td>
+                    <td class="tableitem"><p class="itemtext">{{$row}} </p></td>
+                    <td class="tableitem"><p class="itemtext">{{$item->listcount[$key]}}</p></td>
+                    <td class="tableitem"><p class="itemtext">{{$item->listprice[$key]}} </p></td>
                 </tr>
                 @endforeach
-              
                 @endforeach
               
-              
-         
-               
-
-               
-
-
                 <tr class="tabletitle">
                     <td></td>
                     <td class="Rate"><h2>tax</h2></td>
