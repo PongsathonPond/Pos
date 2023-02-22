@@ -30,7 +30,7 @@
         }
         #invoice-POS h1 {
             font-size: 1.5em;
-            color: #222;
+            color: #000000;
         }
         #invoice-POS h2 {
             font-size: .9em;
@@ -42,7 +42,7 @@
         }
         #invoice-POS p {
             font-size: .7em;
-            color: #666;
+            color: #000000;
             line-height: 1.2em;
         }
         #invoice-POS #top, #invoice-POS #mid, #invoice-POS #bot {
@@ -50,7 +50,7 @@
             border-bottom: 1px solid #EEE;
         }
         #invoice-POS #top {
-            min-height: 100px;
+            min-height: 20px;
         }
         #invoice-POS #mid {
             min-height: 80px;
@@ -97,7 +97,7 @@
             width: 24mm;
         }
         #invoice-POS .itemtext {
-            font-size: .5em;
+            font-size: .9em;
         }
         #invoice-POS #legalcopy {
             margin-top: 5mm;
@@ -124,16 +124,17 @@
 
 <div id="invoice-POS">
 
+   
     <center id="top">
-        <div class="logo"></div>
-        <div class="info">
-            <h2>SBISTechs Inc</h2>
-        </div><!--End Info-->
+    
+       
+            <h1>SBISTechs Inc</h1>
+       
     </center><!--End InvoiceTop-->
 
     <div id="mid">
         <div class="info">
-            <h2>Contact Info</h2>
+            <h2>ช่องทางติดต่อ</h2>
             <p>
                 Address : street city, state 0000</br>
                 Email   : JohnDoe@gmail.com</br>
@@ -147,40 +148,35 @@
         <div id="table" style="width:100%">
             <table>
                 <tr class="tabletitle">
-                    <td class="item"><h2>Item</h2></td>
-                    <td class="Hours"><h2>Qty</h2></td>
-                    <td class="Rate"><h2>Sub Total</h2></td>
+                    <td class="item"><h2>ชื่อสินค้า</h2></td>
+                    <td class="Hours"><h2>จำนวน</h2></td>
+                    <td class="Rate"><h2>ราคา</h2></td>
                 </tr>
 
-                <tr class="service">
-                    <td class="tableitem"><p class="itemtext">Communication</p></td>
-                    <td class="tableitem"><p class="itemtext">5</p></td>
-                    <td class="tableitem"><p class="itemtext">$375.00</p></td>
-                </tr>
+                @php
+                                                                                    
+                $i = 0;
+                $j = 0;
+                
+            @endphp
+
+                @foreach($order_receipt as $item)
+                
+                @foreach($item->listall as $row)
 
                 <tr class="service">
-                    <td class="tableitem"><p class="itemtext">Asset Gathering</p></td>
-                    <td class="tableitem"><p class="itemtext">3</p></td>
-                    <td class="tableitem"><p class="itemtext">$225.00</p></td>
+                    <td class="tableitem"><p class="itemtext">{{$row}}</p></td>
+                    <td class="tableitem"><p class="itemtext"> </p></td>
                 </tr>
+                @endforeach
+              
+                @endforeach
+              
+              
+         
+               
 
-                <tr class="service">
-                    <td class="tableitem"><p class="itemtext">Design Development</p></td>
-                    <td class="tableitem"><p class="itemtext">5</p></td>
-                    <td class="tableitem"><p class="itemtext">$375.00</p></td>
-                </tr>
-
-                <tr class="service">
-                    <td class="tableitem"><p class="itemtext">Animation</p></td>
-                    <td class="tableitem"><p class="itemtext">20</p></td>
-                    <td class="tableitem"><p class="itemtext">$1500.00</p></td>
-                </tr>
-
-                <tr class="service">
-                    <td class="tableitem"><p class="itemtext">Animation Revisions</p></td>
-                    <td class="tableitem"><p class="itemtext">10</p></td>
-                    <td class="tableitem"><p class="itemtext">$750.00</p></td>
-                </tr>
+               
 
 
                 <tr class="tabletitle">
@@ -210,7 +206,7 @@
 
 
 
-<button type="button" name="button" id="print" onclick="window.print();"> Print</button>
+
 
 </body>
 

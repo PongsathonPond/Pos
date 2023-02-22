@@ -49,6 +49,9 @@ return new class extends Migration
             $table->string('type_sale');
             $table->string('amount');
             $table->string('change');
+            $table->string('listall');
+            $table->string('listcount');
+            $table->string('listprice');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

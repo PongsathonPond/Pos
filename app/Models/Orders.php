@@ -15,5 +15,10 @@ class Orders extends Model
         'amount',
         'change',
     ];
+    protected $casts = [
+        'listall' => 'array',
+        'listcount' => 'array',
+        'listprice' => 'array',
+    ];
     use HasFactory;
 }

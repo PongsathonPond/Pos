@@ -4,16 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Orders;
 class CartController extends Controller
 {
     public function cartList()
     {
+        
         $cartItems = \Cart::getContent();
         $listall = DB::table('orders')
        ->orderBy('id', 'desc')
        ->paginate(1);
-        return view('page.shop.index', compact('cartItems','listall'));
+    
+       $lastID = Orders::max('id');
+       $order_receipt = Orders::where('id',$lastID)->get();
+        return view('page.shop.index', compact('cartItems','listall','order_receipt'));
     }
 
     public function addToCart(Request $request)

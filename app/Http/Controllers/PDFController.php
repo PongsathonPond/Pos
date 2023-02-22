@@ -24,7 +24,7 @@ class PDFController extends Controller
         // return $pdf->download('pdf_file.pdf');
 //        return $pdf->stream('pdf_file.pdf');
 
-     return view('page.export.index');
+     return view('page.export.index',compact('print'));
 
     }
 }

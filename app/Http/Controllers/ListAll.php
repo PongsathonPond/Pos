@@ -12,6 +12,7 @@ class ListAll extends Controller
     public function store(Request $request)
     {
 
+     
         $request->validate([
             'amount' => 'required',
             'change' => 'required',
@@ -29,6 +30,10 @@ class ListAll extends Controller
         $tableName->type_sale = $request->type_sale;
         $tableName->amount = $request->amount;
         $tableName->change = $request->change;
+        $tableName->listall = $request->listall;
+        $tableName->listcount = $request->quantity;
+        $tableName->listprice = $request->price;
+        
         $tableName->save();
 
 

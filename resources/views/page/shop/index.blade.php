@@ -79,8 +79,8 @@
                                         </div>
                                     </div>
 
-{{--                                        <a   href="{{ URL::to('generate-pdf/' . $item->id) }}"--}}
-{{--                                           target="_blank"  class="text-danger" > ออกใบเสร็จ <i class="fas fa-print"></i></a>--}}
+                                    {{-- <a   href="{{ URL::to('generate-pdf/' . $item->id) }}"
+                                        target="_blank"  class="text-danger" > ออกใบเสร็จ <i class="fas fa-print"></i></a> --}}
 
 
 
@@ -180,8 +180,11 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                $index=0;
+                            @endphp
                             @foreach ($cartItems as $item)
-
+                                
                                 <tr>
 
                                     <td>
@@ -195,16 +198,17 @@
                                     </td>
                                     <td>
 
-                                        <a class="btn bg-gradient-danger btn-sm mt-3"
-                                           onclick="testtwo('{{ $item->id }}','{{$item->quantity}}')"><i
-                                                class="fas fa-trash"></i></a>
+                                     
 
-{{--                                        <form action="{{ route('cart.update') }}" method="POST">--}}
-{{--                                            @csrf--}}
-{{--                                            <input type="hidden"  value="{{ $item->id}}" >--}}
-{{--                                            <input type="number"   style="width: 50px;border-style: none"  value="{{ $item->quantity }}"/>--}}
-{{--                                            <button type="submit" class="btn bg-gradient-secondary btn-sm " style="margin-top: 3%">update</button>--}}
-{{--                                        </form>--}}
+                                       <form action="{{ route('cart.update') }}" method="POST">
+                                           @csrf
+                                            <input type="hidden"  value="{{ $item->id}}" >
+                                           <input type="number"   style="width: 50px;border-style: none"  id="updateinput{{$index}}" value="{{ $item->quantity }}"/>
+                                   
+                                          <a class="btn bg-gradient-secondary btn-sm"
+                                          onclick="testtwo('{{ $item->id }}','{{$index}}')"><i
+                                               class="fa fa-refresh"></i></a>
+                                      </form> 
 
                                     </td>
                                     <td class="align-middle text-center text-sm">
@@ -221,6 +225,8 @@
                                         @csrf
 
                                         <input type="hidden"  name="product_id[]" value="{{ $item->id }}">
+                                        <input type="hidden"  name="listall[]" value="{{ $item->name }}">
+                                        
                                         <input type="hidden" name="quantity[]" value="{{ $item->quantity }}">
                                         <input type="hidden" name="price[]" value=" {{ $item->price }}">
 
@@ -228,7 +234,10 @@
                                 </tr>
 
 
-
+                                @php
+                                $index++;
+                                @endphp
+                            
                             @endforeach
                         </tbody>
                     </table>
@@ -244,7 +253,7 @@
                                 <h4>จำนวนเงินที่รับ</h4>
                             </label>
                             <input type="text" class="form-control" name="amount" id="num2"
-                                style="color: rgb(19, 23, 235)" placeholder="ยอดเงิน" >
+                                style="color: rgb(19, 23, 235)" placeholder="ยอดเงิน" onchange="calculate()">
                             @error('amount')
                             <div class="my-2">
                                 <span class="text-danger my-2"> {{ $message }} </span>
@@ -292,8 +301,7 @@
                     <h4 > เงินทอน : <span class="badge badge-pill badge-lg bg-gradient-secondary">
                             <input class="form-control" style="color: rgb(255, 255, 255) ;font-size:1vw;width:120px"
                                 id="answer" name="change" readonly> </span>
-                        <a class="badge badge-pill badge-lg bg-gradient-secondary" style="font-size:1vw"
-                            onclick="calculate()"> คำนวณ </a>
+                     
 
                     </h4>
                     @error('change')
@@ -328,9 +336,9 @@
         <script>
             function printreceiptContent(el){
                 var data =
-                    '<input type="button" id= "printPageButton" class="printPageButton" style="display: block; width:100%; border:none; background-color:#008B8B; color:#fff; padding:14px 28px; font-size:16px;cursor:pointer;text-align:center;" value="Print Receipt" onClick="window.print()">';
+                    '<input type="button" id= "printPageButton" class="printPageButton" style="display: block; width:100%; border:none; background-color:#008B8B; color:#fff; padding:14px 28px; font-size:16px;cursor:pointer;text-align:center;" value="PRINT ใบเสร็จ" onClick="window.print()">';
                 data += document.getElementById(el).innerHTML;
-                myReceipt = window.open("","myWin","left=50,top=50,width=400,height=400");
+                myReceipt = window.open("","myWin","left=50,top=50,width=400,height=800");
                 myReceipt.screnX = 0;
                 myReceipt.screnY = 0;
                 myReceipt.document.write(data);
@@ -344,14 +352,13 @@
 
 
             function calculate() {
+
                 var field1 = document.getElementById("num1").value;
                 var field = document.getElementById("num2").value;
                 var result = parseFloat(field) - parseFloat(field1);
 
                 if (!isNaN(result)) {
                     document.getElementById("answer").value = result;
-
-
                 }
             }
 
@@ -371,10 +378,28 @@
                     }
                 })
             }
-            function testtwo(ele,test) {
 
-                console.log(ele)
-                console.log(test)
+            function testtwo(ele,index) {
+
+                console.log(index)
+                var datainput = $('#updateinput'+index).val()
+                let data = {
+                    '_token': $('meta[name="csrf-token"]').attr('content'),
+                    'id': ele,
+                    'quantity':datainput
+                }
+              
+                console.log(data)
+                $.ajax({
+                    type: 'post',
+                    url: "{{ route('cart.update') }}",
+                    data: data,
+                    success: function() {
+                        location.reload();
+                        
+                    }
+                })
+               
             }
 
             function sendform() {
