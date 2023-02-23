@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Debtors;
+use App\Models\Orders;
 class DebtorsController extends Controller
 {
     public function index()
@@ -11,6 +12,14 @@ class DebtorsController extends Controller
         $deb = Debtors::all();
         return view('page.debtors.index',compact('deb'));
     }
+
+     public function read($id)
+    {
+        $deb = Debtors::find($id);
+        $deb2= Orders::where('debtors_id',$id)->get();
+        return view('page.debtors.find', compact('deb','deb2'));
+    }
+
 
     public function store(Request $request)
     {

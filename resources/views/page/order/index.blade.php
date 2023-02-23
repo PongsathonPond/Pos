@@ -69,7 +69,7 @@
 
                                 </td>
                                 <td>
-                                    <b>{{ $item->amount }} บาท</b> 
+                                    <b>{{ $item->total_price }} บาท</b> 
 
                                 </td>
                                 <td>

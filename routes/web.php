@@ -52,5 +52,5 @@ Route::middleware([
 
     Route::get('/debtors', [DebtorsController::class, 'index'])->name('debtors.index');
     Route::post('/debtors/store', [DebtorsController::class, 'store'])->name('debtors_store');
-
+    Route::get('/debtors/{id}', [DebtorsController::class, 'read']);
 });

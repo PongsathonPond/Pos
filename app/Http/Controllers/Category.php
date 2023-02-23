@@ -13,6 +13,8 @@ class Category extends Controller
 
         return view('page.product.category', compact('typeCategory'));
     }
+
+    
     public function store(Request $request)
     {
         $tableName = new Categories();

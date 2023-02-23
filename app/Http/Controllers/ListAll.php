@@ -88,7 +88,7 @@ class ListAll extends Controller
 
         $deb = Debtors::find($request->debtors_id);
         
-       if(!empty($deb->total_debts)){
+       if($deb != null){
             $debtotal = $deb->total_debts;
             Debtors::find($request->debtors_id)->
             update([

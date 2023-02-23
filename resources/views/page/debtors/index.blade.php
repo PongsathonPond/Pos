@@ -1,5 +1,5 @@
 @extends('layouts.shop')
-
+@inject('ThaiFormat', 'App\Services\ThaiDate')
 @section('content')
     <div class="col-lg-2">
         <div class="card ">
@@ -151,56 +151,16 @@
                        </td>
 
                                 <td>
-                                    <b>{{ $item->created_at }}</b>
+                                    <b> {{ $ThaiFormat->makeFormat($item->created_at) }}</b>
 
                                 </td>
 
 
                                 <td class="align-middle">
-                                    <button type="button" class="btn btn-secondary btn-sm bg-gradient-secondary mb-3  "
-                                        data-bs-toggle="modal" data-bs-target="#modal-default"> <i
-                                            class="far fa-edit"></i></button>
-
-                                    <div class="modal fade" id="modal-default" tabindex="-1" role="dialog"
-                                        aria-labelledby="modal-default" aria-hidden="true">
-                                        <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h6 class="modal-title font-weight-normal" id="modal-title-default">
-                                                        <b>แก้ไขประเภทสินค้า</b>
-                                                    </h6>
-                                                    <button type="button" class="btn-close text-dark"
-                                                        data-bs-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="p-4">
-                                                        <form>
-
-                                                            <div class="row">
-
-                                                                <div class="col-12">
-                                                                    <div class="input-group input-group-static mb-4">
-                                                                        <label><b>ชื่อประเภทสินค้า</b></label>
-                                                                        <input type="text" class="form-control">
-                                                                    </div>
-                                                                </div>
-
-
-                                                            </div>
-
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn bg-gradient-success">บันทึก</button>
-                                                    <button type="button" class="btn btn-link  ml-auto"
-                                                        data-bs-dismiss="modal">ปิด</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <a href="{{ url('/debtors/' . $item->id) }}" class=" btn btn-primary"
+                                        style="width: 80%;margin-left: 10% "> ดูรายการหนี้ทั้งหมด</a>
+                                
+                              
 
                                 </td>
                             </tr>
