@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Orders;
+use App\Models\Debtors;
 class CartController extends Controller
 {
     public function cartList()
     {
         
+        $deb = Debtors::all();
         $cartItems = \Cart::getContent();
         $listall = DB::table('orders')
        ->orderBy('id', 'desc')
@@ -17,7 +19,7 @@ class CartController extends Controller
     
        $lastID = Orders::max('id');
        $order_receipt = Orders::where('id',$lastID)->get();
-        return view('page.shop.index', compact('cartItems','listall','order_receipt'));
+        return view('page.shop.index', compact('cartItems','listall','order_receipt','deb'));
     }
 
     public function addToCart(Request $request)

@@ -1,4 +1,4 @@
-@inject('thaiconvert', 'App\Services\ThaiDateHelperService')
+@inject('ThaiFormat', 'App\Services\ThaiDate')
 @extends('layouts.shop')
 @section('content')
     <div class="col-3 mt-2">
@@ -62,8 +62,8 @@
                                 <td>
                                     <div class="d-flex px-2 py-1">
                                         <div>
-
-                                            {{ $thaiconvert->simpleDateFormat($item->created_at) }}
+                                            {{ $ThaiFormat->makeFormat($item->created_at) }}
+                                            
                                         </div>
                                     </div>
                                 </td>
@@ -211,7 +211,7 @@
                                     
                                            <input type="number"   style="width: 50px;border-style: none"  id="updateinput{{$index}}" value="{{ $item->quantity }}"/>
                                    
-                                          <a class="btn bg-gradient-secondary btn-sm"
+                                          <a class="btn bg-gradient-secondary btn-sm" style="margin: 0 auto"
                                           onclick="testtwo('{{ $item->id }}','{{$index}}')"><i
                                                class="fa fa-refresh"></i></a>
                                      
@@ -287,10 +287,21 @@
                     <div class="col-4">
                         <div class="input-group input-group-static mb-4">
                             <label>
-                                <h4>รหัสผู้ค้างชำระ</h4>
+                                <h4>ชื่อผู้ค้างชำระ</h4>
                             </label>
-                            <input type="text" class="form-control" name="test3" id="inputkey"
-                                style="color: rgb(19, 23, 235)" placeholder="กรณีเลือกประเภทเป็นค้างชำระเท่านั้น" >
+                            {{-- <input type="text" class="form-control" name="debtors_id" id="inputkey"
+                                style="color: rgb(19, 23, 235)" placeholder="กรณีเลือกประเภทเป็นค้างชำระเท่านั้น" > --}}
+                                <div class="input-group input-group-static mb-4">
+                                   
+                                    <select class="form-control" id="exampleFormControlSelect1"  name="debtors_id"  style="color: rgb(19, 23, 235)">
+                                      <option value="" >กรณีเลือกประเภทเป็นค้างชำระเท่านั้น</option>
+                                      @foreach ($deb as $item)
+                                      <option value="{{$item->id}}">{{$item->name}}</option>
+                                      @endforeach
+                                     
+                                 
+                                    </select>
+                                  </div>
                         </div>
                     </div>
 
@@ -350,7 +361,7 @@
         <script>
             function printreceiptContent(el){
                 var data =
-                    '<input type="button" id= "printPageButton" class="printPageButton" style="display: block; width:100%; border:none; background-color:#008B8B; color:#fff; padding:14px 28px; font-size:16px;cursor:pointer;text-align:center;" value="PRINT ใบเสร็จ" onClick="window.print()">';
+                    '<input type="button" id= "printPageButton" class="printPageButton" style="display: block; width:100%; border:none; background-color:#008B8B; color:#fff; padding:14px 28px; font-size:16px;cursor:pointer;text-align:center;" value="สั่งพิมพ์ใบเสร็จ" onClick="window.print()">';
                 data += document.getElementById(el).innerHTML;
                 myReceipt = window.open("","myWin","left=50,top=50,width=400,height=800");
                 myReceipt.screnX = 0;

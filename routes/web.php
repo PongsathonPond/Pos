@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\Category;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ListAll;
+use App\Http\Controllers\DebtorsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PDFController;
 /*
@@ -44,6 +45,12 @@ Route::middleware([
     Route::post('/category/store', [Category::class, 'store'])->name('category_store');
 
     Route::post('/list/store', [ListAll::class, 'store'])->name('list');
+    Route::get('/list', [ListAll::class, 'index'])->name('listindex');
 
     Route::get('generate-pdf/{id}', [PDFController::class, 'generatePDF1'])->name('showpdf');
+    Route::get('generate-pdf2/{id}', [PDFController::class, 'generatePDF2'])->name('showpdf2');
+
+    Route::get('/debtors', [DebtorsController::class, 'index'])->name('debtors.index');
+    Route::post('/debtors/store', [DebtorsController::class, 'store'])->name('debtors_store');
+
 });

@@ -93,12 +93,39 @@
                         </a>
                     </li>
                 @endif
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">ประวัติการขาย
+                    </h6>
+                </li>
 
+                @if (request()->routeIs('listindex'))
+                <li class="nav-item">
+                    <a class="nav-link text-white active bg-gradient-success " href="{{ route('listindex') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">table_view</i>
+                        </div>
+                        <span class="nav-link-text ms-1 " >ประวัติการขายปลีก</span>
+                    </a>
+                </li>
+            @else
+                <li class="nav-item">
+                    <a class="nav-link text-white " href="{{ route('listindex') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">table_view</i>
+                        </div>
+                        <span class="nav-link-text ms-1">ประวัติการขายปลีก</span>
+                    </a>
+                </li>
+            @endif
+
+
+                
 
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">จัดการสินค้า
                     </h6>
                 </li>
+
                 @if (request()->routeIs('product.index'))
                     <li class="nav-item">
                         <a class="nav-link text-white active bg-gradient-success " href="{{ route('product.index') }}">
@@ -140,6 +167,31 @@
                     </li>
                 @endif
 
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">จัดการหนี้
+                    </h6>
+                </li>
+                
+                @if (request()->routeIs('debtors.index'))
+                <li class="nav-item">
+                    <a class="nav-link text-white active bg-gradient-success "
+                        href="{{ route('product.category') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">table_view</i>
+                        </div>
+                        <span class="nav-link-text ms-1">จัดการข้อมูลลูกหนี้</span>
+                    </a>
+                </li>
+            @else
+                <li class="nav-item">
+                    <a class="nav-link text-white " href="{{ route('debtors.index') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">table_view</i>
+                        </div>
+                        <span class="nav-link-text ms-1">จัดการข้อมูลลูกหนี้</span>
+                    </a>
+                </li>
+            @endif
 
 
             </ul>

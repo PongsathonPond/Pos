@@ -1,59 +1,13 @@
 @extends('layouts.shop')
-
+@inject('ThaiFormat', 'App\Services\ThaiDate')
 @section('content')
-    <div class="col-lg-2">
-        <div class="card ">
-            <div class="card-header pb-0 p-3">
-                <div class="row">
-                    <div class="col-6 d-flex align-items-center">
-                        <h6 class="mb-0">ประเภทสินค้า</h6>
-                    </div>
-
-                </div>
-            </div>
-            <div class="card-body p-3 pb-0">
-
-                <form action="{{ route('category_store') }}" method="POST" enctype="multipart/form-data">
-                    <form id="post-form">
-                        @csrf
-                        <div class="row">
-
-                            <div class="input-group input-group-outline my-3">
-                                <input type="text" class="form-control" placeholder="ชื่อประเภท" name="name">
-                            </div>
-
-
-                            <button type="input" class="btn btn-success">Add Category</button>
-
-
-                        </div>
-
-                    </form>
-            </div>
-        </div>
-
-        <br><br>
-
-        @if (session('success'))
-            <div class="alert alert-success" role="alert">
-                <strong>สำเร็จ !</strong> เพิ่มประเภทสินค้าเรียบร้อย
-            </div>
-        @endif
-
-        @if (session('error'))
-            <div class="alert alert-danger" role="alert">
-                <strong>พบข้อผิดพลาด !</strong> ไม่พบสินค้าในฐานข้อมูล
-            </div>
-        @endif
-
-    </div>
-
-    <div class="col-lg-10">
+ 
+    <div class="col-lg-12">
 
         <div class="card">
             <div class="card-header p-3 pt-2">
 
-                <h5>รายการประเภทสินค้า</h5>
+                <h5>รายการขายปลีก</h5>
             </div>
             <div class="table-responsive">
                 <table class="table align-items-center mb-0" id="myTable">
@@ -61,11 +15,22 @@
                         <tr>
 
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
-                                ชื่อประเภทสินค้า
+                                ID SLIP
                             </th>
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
-                                เวลาที่เพิ่ม</th>
+                                ประเภทการชำระ
+                            </th>
+                            <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
+                                ยอดรวม
+                            </th>
+                        
+                            <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
+                                เวลาที่ขาย</th>
 
+                                <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
+                                    ใบเสร็จ
+                                </th>
+                              
                             <th></th>
                         </tr>
                     </thead>
@@ -73,20 +38,47 @@
                     <tbody>
 
 
-                        @foreach ($typeCategory as $item)
+                        @foreach ($list as $item)
+                       
+                        
+                       
                             <tr>
                                 <td>
+                                  
                                     <div class="d-flex px-2">
                                         <div class="my-auto">
                                             <b>
-                                                {{ $item->name }}
+                                                MAKE_TEST
                                             </b>
 
                                         </div>
                                     </div>
                                 </td>
+
                                 <td>
-                                    <b>{{ $item->created_at }}</b>
+                                    @if($item->type_sale == "ค้างชำระ")
+                                    <b style="color:rgb(238, 22, 22)">{{ $item->type_sale }}</b>
+                                    @elseif($item->type_sale == "โอนผ่านบัญชีธนาคาร")
+                                    <b style="color:rgb(38, 3, 233)">{{ $item->type_sale }}</b>
+                                    @elseif($item->type_sale == "เงินสด")
+                                    <b>{{ $item->type_sale }}</b>
+                                    
+                                    @endif
+
+                                    
+
+                                </td>
+                                <td>
+                                    <b>{{ $item->amount }} บาท</b> 
+
+                                </td>
+                                <td>
+                                    <b>{{ $ThaiFormat->makeFormat($item->created_at) }}</b>
+
+                                </td>
+                                <td>
+                                         <a   href="{{ URL::to('generate-pdf2/' . $item->id) }}"
+                                        target="_blank"  class="text-danger" > ออกใบเสร็จ <i class="fas fa-print"></i></a>
 
                                 </td>
 
@@ -94,7 +86,7 @@
                                 <td class="align-middle">
                                     <button type="button" class="btn btn-secondary btn-sm bg-gradient-secondary mb-3  "
                                         data-bs-toggle="modal" data-bs-target="#modal-default"> <i
-                                            class="far fa-edit"></i></button>
+                                            class="far fa-eye"></i></button>
 
                                     <div class="modal fade" id="modal-default" tabindex="-1" role="dialog"
                                         aria-labelledby="modal-default" aria-hidden="true">
@@ -102,7 +94,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h6 class="modal-title font-weight-normal" id="modal-title-default">
-                                                        <b>แก้ไขประเภทสินค้า</b>
+                                                        <b>ข้อมูลเพิ่มเติม</b>
                                                     </h6>
                                                     <button type="button" class="btn-close text-dark"
                                                         data-bs-dismiss="modal" aria-label="Close">
@@ -117,8 +109,14 @@
 
                                                                 <div class="col-12">
                                                                     <div class="input-group input-group-static mb-4">
-                                                                        <label><b>ชื่อประเภทสินค้า</b></label>
-                                                                        <input type="text" class="form-control">
+                                                                        <label><b>ชื่อผู้ค้างชำระ</b></label>
+                                                                       
+                                                                        @foreach ($item->testto as $item1)
+                       
+                     
+                          
+                                                                        <input type="text" class="form-control"  value=" {{ $item1->name }}" readonly>
+                                                                        @endforeach
                                                                     </div>
                                                                 </div>
 

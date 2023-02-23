@@ -10,6 +10,7 @@ class Orders extends Model
 
     protected $fillable = [
         'user_id',
+        'debtors_id',
         'total_price',
         'type_sale	',
         'amount',
@@ -21,4 +22,20 @@ class Orders extends Model
         'listprice' => 'array',
     ];
     use HasFactory;
+
+   
+
+    public function testto()
+    {
+
+        return $this->hasMany(Debtors::class, 'id', 'debtors_id');
+
+    }
+
+    public function booktouser()
+    {
+
+        return $this->hasMany(Debtors::class, 'id', 'user_id');
+
+    }
 }

@@ -25,6 +25,17 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        Schema::create('debtors', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('address');
+            $table->string('phone');
+            $table->string('email')->unique();
+            $table->string('total_debts')->default(0)->nullable();
+            $table->string('total_payments')->default(0)->nullable();
+            $table->timestamps();
+        });
+
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -45,6 +56,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('debtors_id')->nullable();
             $table->decimal('total_price', 10, 2);
             $table->string('type_sale');
             $table->string('amount');
@@ -53,6 +65,7 @@ return new class extends Migration
             $table->string('listcount');
             $table->string('listprice');
             $table->timestamps();
+            $table->foreign('debtors_id')->references('id')->on('debtors')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
@@ -66,42 +79,35 @@ return new class extends Migration
             $table->foreign('product_id')->references('id_product')->on('products')->onDelete('cascade');
         });
 
-//        Schema::create('debtors', function (Blueprint $table) {
-//            $table->id();
-//            $table->string('name');
-//            $table->string('address');
-//            $table->string('phone');
-//            $table->string('email')->unique();
-//            $table->timestamps();
-//        });
-//
-//        Schema::create('debts', function (Blueprint $table) {
-//            $table->id();
-//            $table->unsignedBigInteger('debtor_id');
-//            $table->string('description');
-//            $table->decimal('amount', 10, 2);
-//            $table->date('due_date');
-//            $table->timestamps();
-//            $table->foreign('debtor_id')->references('id')->on('debtors')->onDelete('cascade');
-//        });
-//
-//        Schema::create('payments', function (Blueprint $table) {
-//            $table->id();
-//            $table->unsignedBigInteger('debt_id');
-//            $table->decimal('amount', 10, 2);
-//            $table->date('payment_date');
-//            $table->timestamps();
-//            $table->foreign('debt_id')->references('id')->on('debts')->onDelete('cascade');
-//        });
-//
-//        Schema::create('collections', function (Blueprint $table) {
-//            $table->id();
-//            $table->unsignedBigInteger('debt_id');
-//            $table->string('status');
-//            $table->date('collection_date');
-//            $table->timestamps();
-//            $table->foreign('debt_id')->references('id')->on('debts')->onDelete('cascade');
-//        });
+   
+
+       Schema::create('debts', function (Blueprint $table) {
+           $table->id();
+           $table->unsignedBigInteger('debtor_id');
+           $table->string('description');
+           $table->decimal('amount', 10, 2);
+           $table->date('due_date');
+           $table->timestamps();
+           $table->foreign('debtor_id')->references('id')->on('debtors')->onDelete('cascade');
+       });
+
+       Schema::create('payments', function (Blueprint $table) {
+           $table->id();
+           $table->unsignedBigInteger('debt_id');
+           $table->decimal('amount', 10, 2);
+           $table->date('payment_date');
+           $table->timestamps();
+           $table->foreign('debt_id')->references('id')->on('debts')->onDelete('cascade');
+       });
+
+    //    Schema::create('collections', function (Blueprint $table) {
+    //        $table->id();
+    //        $table->unsignedBigInteger('debt_id');
+    //        $table->string('status');
+    //        $table->date('collection_date');
+    //        $table->timestamps();
+    //        $table->foreign('debt_id')->references('id')->on('debts')->onDelete('cascade');
+    //    });
 
     }
 

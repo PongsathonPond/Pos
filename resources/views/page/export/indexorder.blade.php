@@ -6,13 +6,17 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
     <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
-    <title>CodePen - POS Receipt Template Html Css</title>
+    <title>POS Receipt Template</title>
 
     <style>
 
         @media print {
             .page-break { display: block; page-break-before: always; }
         }
+
+      .none{
+        display: none;
+      }
         #invoice-POS {
             box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
             padding: 3mm;
@@ -125,6 +129,7 @@
 
 </head>
 
+<input type="button" id= "printPageButton" class="printPageButton" style="display: block; width:100%; border:none; background-color:#008B8B; color:#ffffff; padding:14px 28px; font-size:16px;cursor:pointer;text-align:center;" value="สั่งพิมพ์ใบเสร็จ" onClick="window.print()">
 <body translate="no" >
 
 <div id="invoice-POS">
@@ -163,15 +168,17 @@
                  @endphp
 
 
-                @foreach($order_receipt as $item)
-                @foreach($item->listall as $key =>$row)
-                <tr class="service">
-                    <td class="tableitem"><p class="itemtextname">{{$row}} </p></td>
-                    <td class="tableitem"><p class="itemtext">{{$item->listcount[$key]}}</p></td>
-                    <td class="tableitem"><p class="itemtext">{{$item->listprice[$key]}} </p></td>
-                </tr>
-                @endforeach
-                @endforeach
+
+@foreach($print->listall as $key =>$row)
+<tr class="service">
+    <td class="tableitem"><p class="itemtextname">{{$row}} </p></td>
+    <td class="tableitem"><p class="itemtext">{{$print->listcount[$key]}}</p></td>
+    <td class="tableitem"><p class="itemtext">{{$print->listprice[$key]}} </p></td>
+</tr>
+@endforeach
+
+             
+              
               
                 <tr class="tabletitle">
                     <td></td>
@@ -180,27 +187,27 @@
                 <tr class="tabletitle">
                     <td >ยอดรับ</td>
                     
-                    @foreach($order_receipt as $item)
+                   
                     
-                    <td ><h2>{{$item->amount}} บาท</h2></td>
-                    @endforeach
+                    <td ><h2>{{$print->amount}} บาท</h2></td>
+                  
                 </tr>
 
                 <tr class="tabletitle">
                     <td >เงินทอน</td>
                   
-                    @foreach($order_receipt as $item)
                     
-                    <td ><h2>{{$item->change}} บาท</h2></td>
-                    @endforeach
+                    
+                    <td ><h2>{{$print->change}} บาท</h2></td>
+                  
                 </tr>
                 <tr class="tabletitle">
                     <td >ยอดรวม</td>
                    
-                    @foreach($order_receipt as $item)
+                   
                     
-                    <td ><h2>{{$item->total_price}} บาท</h2></td>
-                    @endforeach
+                    <td ><h2>{{$print->total_price}} บาท</h2></td>
+                   
                 </tr>
 
             </table>

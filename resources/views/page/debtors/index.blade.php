@@ -6,24 +6,58 @@
             <div class="card-header pb-0 p-3">
                 <div class="row">
                     <div class="col-6 d-flex align-items-center">
-                        <h6 class="mb-0">ประเภทสินค้า</h6>
+                        <h6 class="mb-0">เพิ่มลูกหนี้</h6>
                     </div>
 
                 </div>
             </div>
             <div class="card-body p-3 pb-0">
 
-                <form action="{{ route('category_store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('debtors_store') }}" method="POST" enctype="multipart/form-data">
                     <form id="post-form">
                         @csrf
                         <div class="row">
 
                             <div class="input-group input-group-outline my-3">
-                                <input type="text" class="form-control" placeholder="ชื่อประเภท" name="name">
+                                <input type="text" class="form-control" placeholder="ชื่อ-นามสกุล" name="name">
+                              
                             </div>
+                            @error('name')
+                            <div class="my-2">
+                                <span class="text-danger my-2"> {{ $message }} </span>
+                            </div>
+                            @enderror
+                           
+                            <div class="input-group input-group-outline my-3">
+                                <input type="text" class="form-control" placeholder="ที่อยู่" name="address">
+                               
+                            </div>
+                            @error('address')
+                            <div class="my-2">
+                                <span class="text-danger my-2"> {{ $message }} </span>
+                            </div>
+                            @enderror
+                            <div class="input-group input-group-outline my-3">
+                                <input type="text" class="form-control" placeholder="เบอร์โทร" name="phone">
+                             
+                            </div>
+                            @error('phone')
+                            <div class="my-2">
+                                <span class="text-danger my-2"> {{ $message }} </span>
+                            </div>
+                            @enderror
+                            <div class="input-group input-group-outline my-3">
+                                <input type="text" class="form-control" placeholder="รหัสบัตรประชาชน" name="email">
+                              
+                            </div>
+                            @error('email')
+                            <div class="my-2">
+                                <span class="text-danger my-2"> {{ $message }} </span>
+                            </div>
+                            @enderror
 
 
-                            <button type="input" class="btn btn-success">Add Category</button>
+                            <button type="input" class="btn btn-success">Add Debtors</button>
 
 
                         </div>
@@ -36,7 +70,7 @@
 
         @if (session('success'))
             <div class="alert alert-success" role="alert">
-                <strong>สำเร็จ !</strong> เพิ่มประเภทสินค้าเรียบร้อย
+                <strong>สำเร็จ !</strong> เพิ่มลูกหนี้เรียบร้อย
             </div>
         @endif
 
@@ -53,7 +87,7 @@
         <div class="card">
             <div class="card-header p-3 pt-2">
 
-                <h5>รายการประเภทสินค้า</h5>
+                <h5>รายการลูกหนี้</h5>
             </div>
             <div class="table-responsive">
                 <table class="table align-items-center mb-0" id="myTable">
@@ -61,8 +95,20 @@
                         <tr>
 
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
-                                ชื่อประเภทสินค้า
+                                ชื่อ
                             </th>
+                            <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
+                                เบอร์โทร
+                            </th>
+
+                            <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
+                                หนี้รวม
+                            </th>
+
+                            <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
+                                ยอดรวมที่ชำระ
+                            </th>
+
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
                                 เวลาที่เพิ่ม</th>
 
@@ -73,7 +119,7 @@
                     <tbody>
 
 
-                        @foreach ($typeCategory as $item)
+                        @foreach ($deb as $item)
                             <tr>
                                 <td>
                                     <div class="d-flex px-2">
@@ -85,6 +131,25 @@
                                         </div>
                                     </div>
                                 </td>
+                                <td>
+                                            <b>
+                                                {{ $item->phone }}
+                                            </b>
+
+                                </td>
+                                <td>
+                                    <b>
+                                        {{ $item->total_debts }}
+                                    </b>
+
+                        </td>
+                        <td>
+                            <b>
+                                {{ $item->total_payments }}
+                            </b>
+
+                       </td>
+
                                 <td>
                                     <b>{{ $item->created_at }}</b>
 

@@ -5,11 +5,26 @@ namespace App\Http\Controllers;
 use App\Models\Orders;
 use App\Models\Order_product;
 use App\Models\Product;
+use App\Models\Debtors;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 class ListAll extends Controller
 {
+
+    public function index()
+    {
+        $list = Orders::orderBy('id','desc')->get();
+
+        // $orders = DB::table('orders')
+        // ->orderBy('id', 'desc')
+        // ->first();
+
+        return view('page.order.index', compact('list'));
+    }
+
+
+
     public function store(Request $request)
     {
 
@@ -24,7 +39,7 @@ class ListAll extends Controller
             ],
 
         );
-   
+       
         $tableName = new Orders();
 
         $tableName->user_id = Auth::user()->id;;
@@ -35,10 +50,12 @@ class ListAll extends Controller
         $tableName->listall = $request->listall;
         $tableName->listcount = $request->quantity;
         $tableName->listprice = $request->price;
+       
+        $tableName->debtors_id = $request->debtors_id;
         
         $tableName->save();
 
-
+       
         $orders = DB::table('orders')
             ->orderBy('id', 'desc')
             ->first();
@@ -66,6 +83,19 @@ class ListAll extends Controller
 
             'qty' => $sumtotal - $request->quantity[$i],
         ]);
+
+      
+
+        $deb = Debtors::find($request->debtors_id);
+        
+       if(!empty($deb->total_debts)){
+            $debtotal = $deb->total_debts;
+            Debtors::find($request->debtors_id)->
+            update([
+                'total_debts' =>$debtotal + $request->total_price,
+            ]);
+        }
+      
 
         
         }

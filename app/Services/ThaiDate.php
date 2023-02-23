@@ -3,9 +3,9 @@ namespace App\Services;
 
 use Carbon\Carbon;
 
-class ThaiDateHelperService
+class ThaiDate
 {
-    public static function simpleDateFormat($arg)
+    public static function makeFormat($arg)
     {
         $thai_months = [
             1 => 'ม.ค.',
