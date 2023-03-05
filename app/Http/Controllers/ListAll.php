@@ -116,8 +116,8 @@ class ListAll extends Controller
         }
         \Cart::clear();
 
-        return redirect()->route('shopP')->with('ok', 'addlistall!');;
-
+        // return redirect()->route('shopP')->with('ok', 'addlistall!');
+        return redirect()->back()->with('ok', 'addlistall');   
     }
 
     public function delete($id)
