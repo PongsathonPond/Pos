@@ -144,7 +144,15 @@
                 137 หมู่ 6 ตำบล มะเกลือใหม่ อ.สูงเนิน จ.นครราชสีมา 30170</br>
                 โทรศัพท์   : 090-2382762</br>
             </p>
+         
         </div>
+        <hr>
+        <p>รหัสใบเสร็จ </br>
+            @foreach($order_receipt as $item)
+            {{$item->slip_id}} 
+            @endforeach
+    </p>
+        
     </div><!--End Invoice Mid-->
 
     <div id="bot">
@@ -203,12 +211,24 @@
                     @endforeach
                 </tr>
 
+                <tr class="tabletitle">
+                    <td >วันที่ขาย</td>
+                   
+                    @foreach($order_receipt as $item)
+                    
+                    <td ><h2>  {{ $ThaiFormat->makeFormat($item->created_at) }}</h2></td>
+                    @endforeach
+                </tr>
+
             </table>
         </div><!--End Table-->
 
         <div id="legalcopy">
-            <p class="legal"><strong>Thank you for your business!</strong>  Payment is expected within 31 days; please process this invoice within that time. There will be a 5% interest charge per month on late invoices.
-            </p>
+            
+ 
+                  <h5 style="text-align: center">ขอบคุณที่ใช้บริการ</h5>
+              
+               
         </div>
 
     </div><!--End InvoiceBot-->

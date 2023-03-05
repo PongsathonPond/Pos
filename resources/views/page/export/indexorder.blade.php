@@ -1,3 +1,4 @@
+@inject('ThaiFormat', 'App\Services\ThaiDate')
 <!DOCTYPE html>
 <html lang="en" >
 
@@ -150,6 +151,13 @@
                 โทรศัพท์   : 090-2382762</br>
             </p>
         </div>
+        <hr>
+        <p>รหัสใบเสร็จ </br>
+           
+            {{$print->slip_id}} 
+           
+    </p>
+        
     </div><!--End Invoice Mid-->
 
     <div id="bot">
@@ -210,13 +218,21 @@
                    
                 </tr>
 
+                <tr class="tabletitle">
+                    <td >วันที่ขาย</td>
+                   
+                  
+                    
+                    <td ><h2>  {{ $ThaiFormat->makeFormat($print->created_at) }}</h2></td>
+                  
+                </tr>
+
             </table>
         </div><!--End Table-->
 
         <div id="legalcopy">
-            <p class="legal"><strong>Thank you for your business!</strong>  Payment is expected within 31 days; please process this invoice within that time. There will be a 5% interest charge per month on late invoices.
-            </p>
-        </div>
+            <h5 style="text-align: center">ขอบคุณที่ใช้บริการ</h5>
+         </div>
 
     </div><!--End InvoiceBot-->
 </div><!--End Invoice-->

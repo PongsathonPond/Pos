@@ -57,8 +57,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('debtors_id')->nullable();
+            $table->string('slip_id');
             $table->decimal('total_price', 10, 2);
             $table->string('type_sale');
+            $table->string('type');
             $table->string('amount');
             $table->string('change');
             $table->string('listall');
@@ -95,9 +97,8 @@ return new class extends Migration
            $table->id();
            $table->unsignedBigInteger('debt_id');
            $table->decimal('amount', 10, 2);
-           $table->date('payment_date');
            $table->timestamps();
-           $table->foreign('debt_id')->references('id')->on('debts')->onDelete('cascade');
+           $table->foreign('debt_id')->references('id')->on('debtors')->onDelete('cascade');
        });
 
     //    Schema::create('collections', function (Blueprint $table) {

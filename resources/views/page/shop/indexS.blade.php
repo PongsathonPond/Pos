@@ -15,7 +15,7 @@
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
 
-                <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('cart.stores') }}" method="POST" enctype="multipart/form-data">
 
                     @csrf
                     <div class="input-group input-group-static mb-4">
@@ -169,7 +169,7 @@
         <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="bg-gradient-success shadow-primary border-radius-lg pt-4 pb-3">
-                    <h6 class="text-white text-capitalize ps-3">รายการขายปลีก</h6>
+                    <h6 class="text-white text-capitalize ps-3">รายการขายส่ง</h6>
                 </div>
             </div>
             <div class="card-body px-0 pb-2">
@@ -281,7 +281,7 @@
                                     <option value="ค้างชำระ"><b>ค้างชำระ</b></option>
 
                                 </select>
-                                <input type="hidden" name="type" value="ขายปลีก">
+                                <input type="hidden" name="type" value="ขายส่ง">
                             </div>
                         </div>
                     </div>

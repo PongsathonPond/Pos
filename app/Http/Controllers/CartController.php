@@ -22,6 +22,20 @@ class CartController extends Controller
         return view('page.shop.index', compact('cartItems','listall','order_receipt','deb'));
     }
 
+    public function cartListS()
+    {
+        
+        $deb = Debtors::all();
+        $cartItems = \Cart::getContent();
+        $listall = DB::table('orders')
+       ->orderBy('id', 'desc')
+       ->paginate(1);
+    
+       $lastID = Orders::max('id');
+       $order_receipt = Orders::where('id',$lastID)->get();
+        return view('page.shop.indexS', compact('cartItems','listall','order_receipt','deb'));
+    }
+
     public function addToCart(Request $request)
     {
 
@@ -46,6 +60,33 @@ class CartController extends Controller
         }
 
         return redirect()->route('shopP');
+
+    }
+
+    public function addToCartS(Request $request)
+    {
+
+        $item = DB::table('products')
+            ->where('id_product', '=', $request->name)
+            ->get();
+
+        if (empty($item[0])) {
+            session()->flash('error', 'Product is Added to Cart Successfully !');
+        } else {
+            \Cart::add([
+                'id' => $item[0]->id_product,
+                'name' => $item[0]->name,
+                'price' => $item[0]->priceS,
+                'quantity' => 1,
+                'attributes' => array(
+                    'image' => "nil",
+                ),
+            ]);
+            session()->flash('success', 'Product is Added to Cart Successfully !');
+
+        }
+
+        return redirect()->route('shopS');
 
     }
 

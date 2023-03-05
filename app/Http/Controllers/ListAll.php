@@ -9,18 +9,30 @@ use App\Models\Debtors;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 class ListAll extends Controller
 {
 
     public function index()
     {
-        $list = Orders::orderBy('id','desc')->get();
+        $list = Orders::where('type',"ขายปลีก")->orderBy('id','desc')->get();
 
         // $orders = DB::table('orders')
         // ->orderBy('id', 'desc')
         // ->first();
 
         return view('page.order.index', compact('list'));
+    }
+
+    public function indexS()
+    {
+        $list = Orders::where('type',"ขายส่ง")->orderBy('id','desc')->get();
+
+        // $orders = DB::table('orders')
+        // ->orderBy('id', 'desc')
+        // ->first();
+
+        return view('page.order.indexS', compact('list'));
     }
 
 
@@ -39,12 +51,15 @@ class ListAll extends Controller
             ],
 
         );
-       
+        $id = IdGenerator::generate(['table' => 'orders', 'field' => 'slip_id', 'length' => 17, 'prefix' => 'SLIP-']);
+
         $tableName = new Orders();
 
-        $tableName->user_id = Auth::user()->id;;
+        $tableName->user_id = Auth::user()->id;
+        $tableName->slip_id = $id;
         $tableName->total_price = $request->total_price;
         $tableName->type_sale = $request->type_sale;
+        $tableName->type = $request->type;
         $tableName->amount = $request->amount;
         $tableName->change = $request->change;
         $tableName->listall = $request->listall;
@@ -99,8 +114,18 @@ class ListAll extends Controller
 
         
         }
+        \Cart::clear();
 
         return redirect()->route('shopP')->with('ok', 'addlistall!');;
+
+    }
+
+    public function delete($id)
+    {
+
+        //ลบข้อมูล
+        $delete = Orders::find($id)->delete();
+        return redirect()->back()->with('delete', "ลบเรียบร้อยแล้ว");
 
     }
 }

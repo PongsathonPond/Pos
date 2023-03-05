@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-header p-3 pt-2">
 
-                <h5>รายการขายปลีก</h5>
+                <h5>รายการขายส่ง</h5>
             </div>
             <div class="table-responsive">
                 <table class="table align-items-center mb-0" id="myTable">
@@ -31,10 +31,9 @@
                                     ใบเสร็จ
                                 </th>
                               
-                                <th>
-
-                                </th>
-                            
+                            <th>
+                                
+                            </th>
                         </tr>
                     </thead>
 
@@ -84,11 +83,11 @@
                                         target="_blank"  class="text-danger" > ออกใบเสร็จ <i class="fas fa-print"></i></a>
 
                                 </td>
+
                                 <td>
                                     <a href="{{ url('/listall/delete/' . $item->id) }}"class="btn btn-secondary btn-sm bg-gradient-danger mb-3"
                                         onclick="return confirm('ลบหรือไม่ ?')"> ลบข้อมูล</a>
                                 </td>
-
                                
                             </tr>
                         @endforeach

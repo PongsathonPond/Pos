@@ -40,11 +40,23 @@
             </div>
         @endif
 
+        @if (session('update'))
+        <div class="alert alert-success" role="alert">
+            <strong>สำเร็จ !</strong> แก้ไขประเภทสินค้าเรียบร้อย
+        </div>
+         @endif
+
         @if (session('error'))
             <div class="alert alert-danger" role="alert">
                 <strong>พบข้อผิดพลาด !</strong> ไม่พบสินค้าในฐานข้อมูล
             </div>
         @endif
+
+        @if (session('delete'))
+        <div class="alert alert-danger" role="alert">
+            <strong>สำเร็จ !</strong> ลบข้อมูลประเภทเรียบร้อย
+        </div>
+    @endif
 
     </div>
 
@@ -92,11 +104,15 @@
 
 
                                 <td class="align-middle">
+
                                     <button type="button" class="btn btn-secondary btn-sm bg-gradient-secondary mb-3  "
-                                        data-bs-toggle="modal" data-bs-target="#modal-default"> <i
+                                        data-bs-toggle="modal" data-bs-target="#modal-default{{$item->id}}"> <i
                                             class="far fa-edit"></i></button>
 
-                                    <div class="modal fade" id="modal-default" tabindex="-1" role="dialog"
+                                            <a href="{{ url('/category/delete/' . $item->id) }}"class="btn btn-secondary btn-sm bg-gradient-danger mb-3"
+                                                onclick="return confirm('ลบหรือไม่ ?')"> ลบข้อมูล</a>
+
+                                    <div class="modal fade" id="modal-default{{$item->id}}" tabindex="-1" role="dialog"
                                         aria-labelledby="modal-default" aria-hidden="true">
                                         <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                                             <div class="modal-content">
@@ -111,28 +127,33 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="p-4">
-                                                        <form>
+                                                        <form action="{{ url('/category-update/' . $item->id) }}"
+                                                            method="post">
+                                                            @csrf
+
 
                                                             <div class="row">
 
                                                                 <div class="col-12">
                                                                     <div class="input-group input-group-static mb-4">
                                                                         <label><b>ชื่อประเภทสินค้า</b></label>
-                                                                        <input type="text" class="form-control">
+                                                                        <input type="text" class="form-control" name="name" value="{{$item->name}}">
                                                                     </div>
                                                                 </div>
 
 
                                                             </div>
 
+                                                            <div >
+                                                                <button type="submit" class="btn bg-gradient-success">บันทึก</button>
+                                                                <button type="button" class="btn btn-link  ml-auto"
+                                                                    data-bs-dismiss="modal">ปิด</button>
+                                                            </div>
                                                         </form>
+                                                      
                                                     </div>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn bg-gradient-success">บันทึก</button>
-                                                    <button type="button" class="btn btn-link  ml-auto"
-                                                        data-bs-dismiss="modal">ปิด</button>
-                                                </div>
+                                              
                                             </div>
                                         </div>
                                     </div>

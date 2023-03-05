@@ -31,4 +31,37 @@ class ProductController extends Controller
 
     }
 
+    public function update(Request $request, $id)
+    {
+       
+       
+        
+        $request->validate([
+
+            'name' => 'required',
+            'priceP' => 'required',
+            'priceS' => 'required',
+            'qty' => 'required',
+
+        ],
+
+            ['name.required' => "กรุณาป้อนชื่อสินค้า",
+            'priceP.required' => "กรุณาป้อนราคาขายปลีก",
+            'priceS.required' => "กรุณาป้อนราคาขายส่ง",
+            'qty.required' => "กรุณาป้อนจำนวน",
+            ]
+        );  
+        Product::where('id_product',$request->id)->update([
+
+            'name' => $request->name,
+            'priceP' => $request->priceP,
+            'priceS' => $request->priceS,
+            'qty' => $request->qty,
+
+        ]);
+
+        return redirect()->back()->with('update', "อัพเดตข้อมูลเรียบร้อย");
+        // return redirect()->route('usermanager')->with('success',"อัพเดตข้อมูลเรียบร้อย");
+    }
+
 }

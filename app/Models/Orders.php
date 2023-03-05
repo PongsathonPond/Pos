@@ -11,10 +11,12 @@ class Orders extends Model
     protected $fillable = [
         'user_id',
         'debtors_id',
+        'slip_id',
         'total_price',
         'type_sale	',
         'amount',
         'change',
+        'type'
     ];
     protected $casts = [
         'listall' => 'array',

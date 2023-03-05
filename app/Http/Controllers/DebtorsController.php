@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Debtors;
 use App\Models\Orders;
+use App\Models\Payments;
+use Carbon\Carbon;
 class DebtorsController extends Controller
 {
     public function index()
@@ -17,8 +19,33 @@ class DebtorsController extends Controller
     {
         $deb = Debtors::find($id);
         $deb2= Orders::where('debtors_id',$id)->get();
-        return view('page.debtors.find', compact('deb','deb2'));
+        $deb3= Payments::where('debt_id',$id)->get();
+        return view('page.debtors.find', compact('deb','deb2','deb3'));
     }
+    public function storeid(Request $request)
+    {
+        
+        $request->validate([
+            'amount' => 'required',
+        
+        ],
+            [
+                'amount.required' => "กรุณาป้อนจำนวนเงิน",
+             
+               
+            ],
+
+        );
+
+        $tableName = new Payments();
+        $tableName->debt_id  = $request->debt_id ;
+        $tableName->amount = $request->amount;
+      
+        $tableName->save();
+
+        return redirect()->back()->with('success', "บันทึกข้อมูลเรียบร้อย");
+    }
+   
 
 
     public function store(Request $request)

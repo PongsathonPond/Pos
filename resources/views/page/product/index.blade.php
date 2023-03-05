@@ -27,7 +27,7 @@
                                 <select class="form-control" id="exampleFormControlSelect1" name="category_id">
                                     <option>กรุณาเลือกประเภท</option>
                                     @foreach ($typeCategory as $item)
-                                        <option value="{{ $item->id }}">{{ $item->id }}</option>
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -70,12 +70,18 @@
             </div>
         @endif
 
+        @if (session('update'))
+        <div class="alert alert-success" role="alert">
+            <strong>สำเร็จ !</strong> แก้ไขข้อมูลสินค้าเรียบร้อย
+        </div>
+        @endif
+
         @if (session('error'))
             <div class="alert alert-danger" role="alert">
                 <strong>พบข้อผิดพลาด !</strong> ไม่พบสินค้าในฐานข้อมูล
             </div>
         @endif
-
+       
     </div>
 
     <div class="col-lg-10">
@@ -131,10 +137,10 @@
 
                                 <td class="align-middle">
                                     <button type="button" class="btn btn-secondary btn-sm bg-gradient-secondary mb-3  "
-                                        data-bs-toggle="modal" data-bs-target="#modal-default"> <i
+                                        data-bs-toggle="modal" data-bs-target="#modal-default{{$item->id_product }}"> <i
                                             class="far fa-edit"></i></button>
 
-                                    <div class="modal fade" id="modal-default" tabindex="-1" role="dialog"
+                                    <div class="modal fade" id="modal-default{{$item->id_product }}" tabindex="-1" role="dialog"
                                         aria-labelledby="modal-default" aria-hidden="true">
                                         <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                                             <div class="modal-content">
@@ -149,45 +155,48 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="p-4">
-                                                        <form>
-
+                                                  
+                                                            <form action="{{ url('/product-update/' . $item->id_product) }}"
+                                                                method="post">
+                                                                @csrf
                                                             <div class="row">
 
                                                                 <div class="col-12">
                                                                     <div class="input-group input-group-static mb-4">
                                                                         <label><b>ชื่อสินค้า</b></label>
-                                                                        <input type="text" class="form-control">
+                                                                        <input type="text" class="form-control"  name="name" value="{{$item->name}}" >
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-6">
                                                                     <div class="input-group input-group-static mb-4">
                                                                         <label><b>ราคาปลีก</b></label>
-                                                                        <input type="text" class="form-control">
+                                                                        <input type="text" class="form-control" name="priceP" value="{{$item->priceP}}">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-6">
                                                                     <div class="input-group input-group-static mb-4">
                                                                         <label><b>ราคาส่ง</b></label>
-                                                                        <input type="text" class="form-control">
+                                                                        <input type="text" class="form-control" name="priceS" value="{{$item->priceS}}">
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="col-12">
                                                                     <div class="input-group input-group-static mb-4">
                                                                         <label><b>จำนวน</b></label>
-                                                                        <input type="text" class="form-control">
+                                                                        <input type="text" class="form-control" name="qty" value="{{$item->qty}}" >
                                                                     </div>
                                                                 </div>
                                                             </div>
 
+                                                            <div >
+                                                                <button type="submit" class="btn bg-gradient-success">บันทึก</button>
+                                                                <button type="button" class="btn btn-link  ml-auto"
+                                                                    data-bs-dismiss="modal">ปิด</button>
+                                                            </div>
                                                         </form>
                                                     </div>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn bg-gradient-success">บันทึก</button>
-                                                    <button type="button" class="btn btn-link  ml-auto"
-                                                        data-bs-dismiss="modal">ปิด</button>
-                                                </div>
+                                               
                                             </div>
                                         </div>
                                     </div>

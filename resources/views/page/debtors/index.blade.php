@@ -101,13 +101,13 @@
                                 เบอร์โทร
                             </th>
 
-                            <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
+                            {{-- <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
                                 หนี้รวม
                             </th>
 
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
                                 ยอดรวมที่ชำระ
-                            </th>
+                            </th> --}}
 
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
                                 เวลาที่เพิ่ม</th>
@@ -137,7 +137,7 @@
                                             </b>
 
                                 </td>
-                                <td>
+                                {{-- <td>
                                     <b>
                                         {{ $item->total_debts }}
                                     </b>
@@ -148,7 +148,7 @@
                                 {{ $item->total_payments }}
                             </b>
 
-                       </td>
+                       </td> --}}
 
                                 <td>
                                     <b> {{ $ThaiFormat->makeFormat($item->created_at) }}</b>

@@ -7,7 +7,42 @@
         <div class="card">
             <div class="card-header p-3 pt-2">
 
-                <h5>รายการขายปลีก</h5>
+                <h5>สินค้าขายดีค้นหาจากวันที่</h5>
+            </div>
+            <form action="{{ route('finddash1') }}" method="POST" enctype="multipart/form-data"> 
+                @csrf
+            <div class="row">
+                <div class="col-3"  style="margin-left: 10px">
+                    <div class="input-group input-group-static my-3">
+                        <label>เวลาเริ่มต้น</label>
+                        <input type="date" class="form-control" name="start">
+                      </div>
+                </div>
+
+                <div class="col-3" style="margin-left: 10px">
+                    <div class="input-group input-group-static my-3">
+                        <label>เวลาสิ้นสุด</label>
+                        <input type="date" class="form-control" name="end">
+                      </div>
+                </div>
+
+                <div class="col-3" >
+                    <button type="submit" class="btn bg-gradient-success" style="margin-top: 10%">ค้นหา</button>
+                </div>
+            </div>
+        </form>
+    
+        </div>
+
+        <br>
+
+       
+
+
+        <div class="card">
+            <div class="card-header p-3 pt-2">
+
+                <h5>ข้อมูล</h5>
             </div>
             <div class="table-responsive">
                 <table class="table align-items-center mb-0" id="myTable">
@@ -41,7 +76,7 @@
                     <tbody>
 
 
-                        @foreach ($list as $item)
+                      
                        
                         
                        
@@ -51,7 +86,7 @@
                                     <div class="d-flex px-2">
                                         <div class="my-auto">
                                             <b>
-                                                {{$item->slip_id}}
+                                               
                                             </b>
 
                                         </div>
@@ -59,39 +94,30 @@
                                 </td>
 
                                 <td>
-                                    @if($item->type_sale == "ค้างชำระ")
-                                    <b style="color:rgb(238, 22, 22)">{{ $item->type_sale }}</b>
-                                    @elseif($item->type_sale == "โอนผ่านบัญชีธนาคาร")
-                                    <b style="color:rgb(38, 3, 233)">{{ $item->type_sale }}</b>
-                                    @elseif($item->type_sale == "เงินสด")
-                                    <b>{{ $item->type_sale }}</b>
-                                    
-                                    @endif
+                                  
 
                                     
 
                                 </td>
                                 <td>
-                                    <b>{{ $item->total_price }} บาท</b> 
+                                    <b> บาท</b> 
 
                                 </td>
                                 <td>
-                                    <b>{{ $ThaiFormat->makeFormat($item->created_at) }}</b>
+                                    <b></b>
 
                                 </td>
                                 <td>
-                                         <a   href="{{ URL::to('generate-pdf2/' . $item->id) }}"
-                                        target="_blank"  class="text-danger" > ออกใบเสร็จ <i class="fas fa-print"></i></a>
+                                        
 
                                 </td>
                                 <td>
-                                    <a href="{{ url('/listall/delete/' . $item->id) }}"class="btn btn-secondary btn-sm bg-gradient-danger mb-3"
-                                        onclick="return confirm('ลบหรือไม่ ?')"> ลบข้อมูล</a>
+                                   
                                 </td>
 
                                
                             </tr>
-                        @endforeach
+                       
 
 
                     </tbody>
