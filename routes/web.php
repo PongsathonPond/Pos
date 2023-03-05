@@ -7,6 +7,8 @@ use App\Http\Controllers\ListAll;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\DebtorsController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use App\Http\Controllers\PDFController;
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +32,79 @@ Route::middleware([
 ])->group(function () {
 
     Route::get('/dashboard', function () {
-        return view('dashboard');
+
+        $qty = DB::table('products')
+        ->select(DB::raw('COUNT(id_product ) as total_qty'))
+        ->first();
+
+        $category = DB::table('categories')
+        ->select(DB::raw('COUNT(id) as total_qty'))
+        ->first();
+
+        $debtors = DB::table('debtors')
+        ->select(DB::raw('COUNT(id) as total_qty'))
+        ->first();
+
+        $price = DB::table('order_products')
+        ->select(DB::raw('SUM(price ) as total_qty'))
+        ->first();
+
+        $ordernew = DB::table('order_products')
+        ->join('products', 'order_products.product_id', 'products.id_product')
+        ->join('categories', 'categories.id', 'products.category_id')
+        ->select('categories.name',DB::raw('count(products.category_id) as total'))
+        ->groupBy('categories.name')
+        ->orderBy('total','desc')
+        ->simplePaginate(5);
+
+        $dash1 = [];
+        $dash1_1 = [];
+
+        foreach ($ordernew as $dash => $values) {
+            $dash1[] = $values->name;
+        }
+
+        foreach ($ordernew as $dash => $values) {
+            $dash1_1[] = $values->total;
+        }
+
+       
+        $mon =DB::table('order_products')
+        ->select(DB::raw("(sum(price)) as priceall"), DB::raw("(DATE_FORMAT(created_at, '%m')) as month"), DB::raw("(DATE_FORMAT(created_at, '%Y')) as year"))
+                            ->orderBy('created_at')
+                            ->groupBy(DB::raw("DATE_FORMAT(created_at, '%m')"),DB::raw("DATE_FORMAT(created_at, '%Y')"))
+                            ->get();
+                                                  
+         $time = date("Y", time()); 
+         $timemon = date("m", time()); 
+
+        //  dd($timemon);
+        $summon = [];
+        $summonall = [];
+       
+        $allmon = ["01","02","03","04","05","06","07","08","09","10","11","12"];
+       
+       
+
+         foreach ($mon as $dash => $item) {
+           
+             if($time == $item->year){
+                
+                $summon[] = $item->priceall;
+             }
+        }
+
+      
+
+      
+        
+    
+     
+
+                
+
+         
+        return view('dashboard',compact('qty','category','debtors','price','dash1','dash1_1','summon'));
     })->name('dashboard');
 
     Route::get('/shop', [CartController::class, 'cartList'])->name('shopP');

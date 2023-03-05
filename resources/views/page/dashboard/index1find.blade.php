@@ -11,23 +11,19 @@
             </div>
             <form action="{{ route('category_store') }}" method="POST" enctype="multipart/form-data"> 
             <div class="row">
-                <div class="col-3"  style="margin-left: 10px">
-                    <div class="input-group input-group-static my-3">
-                        <label>เวลาเริ่มต้น</label>
-                        <input type="date" class="form-control" name="start">
+                <div class="col-12"  style="margin-left: 10px">
+                    <div class="input-group input-group-static ">
+                        <h6>เวลาเริ่มต้น</h6> &nbsp;
+                        <h6> {{ $ThaiFormat->makeFormat2($from) }}</h6>
+                        &nbsp; <h6>-</h6>&nbsp;
+                        <h6>เวลาสิ้นสุด</h6> &nbsp;
+                        <h6> {{ $ThaiFormat->makeFormat2($to) }}</h6>
                       </div>
                 </div>
 
-                <div class="col-3" style="margin-left: 10px">
-                    <div class="input-group input-group-static my-3">
-                        <label>เวลาสิ้นสุด</label>
-                        <input type="date" class="form-control" name="end">
-                      </div>
-                </div>
+            
 
-                <div class="col-3" >
-                    <button type="submit" class="btn bg-gradient-success" style="margin-top: 10%">ค้นหา</button>
-                </div>
+                
             </div>
         </form>
     
@@ -49,25 +45,20 @@
                         <tr>
 
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
-                                ID SLIP
+                                ลำดับ
                             </th>
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
-                                ประเภทการชำระ
+                                ชื่อสินค้า
                             </th>
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
-                                ยอดรวม
+                                จำนวน
                             </th>
                         
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
-                                เวลาที่ขาย</th>
+                                ราคารวม</th>
 
-                                <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
-                                    ใบเสร็จ
-                                </th>
-                              
-                                <th>
-
-                                </th>
+                            
+                             
                             
                         </tr>
                     </thead>
@@ -75,9 +66,15 @@
                     <tbody>
 
 
-                      
+                      @php
+                       $i=1;
+                       $sum=0;
+                       $qty=0;
+                      @endphp
                        
-                        
+                        @foreach ($orders as $item)
+                            
+                       
                        
                             <tr>
                                 <td>
@@ -85,7 +82,7 @@
                                     <div class="d-flex px-2">
                                         <div class="my-auto">
                                             <b>
-                                               
+                                               {{{$i++}}}
                                             </b>
 
                                         </div>
@@ -93,34 +90,36 @@
                                 </td>
 
                                 <td>
-                                  
-
+                                    <b>{{$item->name}}</b>
+                                       
                                     
 
                                 </td>
+                              
                                 <td>
-                                    <b> บาท</b> 
+                                    @php
+                                            $qty += $item->total_qty;
+                                        @endphp
+                                    <b>{{$item->total_qty}} ชิ้น</b> 
 
                                 </td>
                                 <td>
-                                    <b></b>
-
+                                        @php
+                                            $sum += $item->total_price;
+                                        @endphp
+                                    <b>{{$item->total_price}} บาท</b>
                                 </td>
-                                <td>
-                                        
-
-                                </td>
-                                <td>
-                                   
-                                </td>
+                              
 
                                
                             </tr>
                        
-
-
+                           
+                            @endforeach
                     </tbody>
                 </table>
+                <h5 style="margin-left: 20px">ยอดรวมจำนวน : {{$qty}}  ชิ้น</h5>
+                <h5 style="margin-left: 20px">ยอดขายรวม : {{$sum}}  บาท</h5>
             </div>
         </div>
 

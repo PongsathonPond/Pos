@@ -22,10 +22,11 @@ class dashboardController extends Controller
                 ->select('products.name',DB::raw('SUM(quantity) as total_qty'),DB::raw('SUM(price) as total_price'))
                 ->whereBetween('order_products.created_at', [$from, $to])
                 ->groupBy('products.name')
+                ->orderBy('total_qty', 'desc')
                 ->get();
                 
-        dd($orders);
-        return view('page.dashboard.index1find');
+        
+        return view('page.dashboard.index1find',compact('orders','from','to'));
     }
 
     

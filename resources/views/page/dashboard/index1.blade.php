@@ -50,22 +50,19 @@
                         <tr>
 
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
-                                ID SLIP
+                                ลำดับ
                             </th>
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
-                                ประเภทการชำระ
+                                ชื่อสินค้า
                             </th>
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
-                                ยอดรวม
+                                จำนวน
                             </th>
                         
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
-                                เวลาที่ขาย</th>
+                                ราคารวม</th>
 
-                                <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
-                                    ใบเสร็จ
-                                </th>
-                              
+                            
                                 <th>
 
                                 </th>
@@ -99,10 +96,7 @@
                                     
 
                                 </td>
-                                <td>
-                                    <b> บาท</b> 
-
-                                </td>
+                              
                                 <td>
                                     <b></b>
 
