@@ -56,6 +56,7 @@ class ListAll extends Controller
         $tableName = new Orders();
 
         $tableName->user_id = Auth::user()->id;
+        $tableName->user_auth = Auth::user()->name;
         $tableName->slip_id = $id;
         $tableName->total_price = $request->total_price;
         $tableName->type_sale = $request->type_sale;
@@ -65,7 +66,6 @@ class ListAll extends Controller
         $tableName->listall = $request->listall;
         $tableName->listcount = $request->quantity;
         $tableName->listprice = $request->price;
-       
         $tableName->debtors_id = $request->debtors_id;
         
         $tableName->save();

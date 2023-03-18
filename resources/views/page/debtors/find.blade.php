@@ -179,8 +179,9 @@
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2" style="text-align: center">
                                 เวลาที่จ่าย</th>
 
-                               
-                              
+                                <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2" style="text-align: center">
+                                    จัดการ</th>
+                                
                             
                         </tr>
                     </thead>
@@ -209,7 +210,11 @@
                                     
                                     <b>{{ $ThaiFormat->makeFormat($item->created_at) }} </b>
                                 </td>
-                           
+                                
+                                <td style="text-align: center">
+                                    <a href="{{ url('/payment/delete/' . $item->id) }}"class="btn btn-secondary btn-sm bg-gradient-danger mb-3"
+                                        onclick="return confirm('ลบหรือไม่ ?')"> ลบข้อมูล</a>
+                                </td>
 
 
                               

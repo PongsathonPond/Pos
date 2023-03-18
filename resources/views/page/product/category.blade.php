@@ -109,8 +109,8 @@
                                         data-bs-toggle="modal" data-bs-target="#modal-default{{$item->id}}"> <i
                                             class="far fa-edit"></i></button>
 
-                                            <a href="{{ url('/category/delete/' . $item->id) }}"class="btn btn-secondary btn-sm bg-gradient-danger mb-3"
-                                                onclick="return confirm('ลบหรือไม่ ?')"> ลบข้อมูล</a>
+                                            {{-- <a href="{{ url('/category/delete/' . $item->id) }}"class="btn btn-secondary btn-sm bg-gradient-danger mb-3"
+                                                onclick="return confirm('ลบหรือไม่ ?')"> ลบข้อมูล</a> --}}
 
                                     <div class="modal fade" id="modal-default{{$item->id}}" tabindex="-1" role="dialog"
                                         aria-labelledby="modal-default" aria-hidden="true">

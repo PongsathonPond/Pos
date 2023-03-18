@@ -12,6 +12,7 @@ class Order_product extends Model
         'product_id ',
         'quantity	',
         'price',
+        'user_auth',
 
     ];
     use HasFactory;

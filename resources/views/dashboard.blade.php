@@ -1,8 +1,10 @@
 @extends('layouts.shop')
+
 @section('content')
 
 
-<div class="row">
+
+<div class="row"> 
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
         <div class="card">
             <div class="card-header p-3 pt-2">
@@ -104,15 +106,17 @@
         </div>
         </div>
         </div>
+
+       
 </div>
 
+<a href="http://localhost/phpmyadmin/index.php?route=/database/export&db=pos"  target="_blank" class="btn btn-primary"> Export DB</a>
+
+
+<script src="../assets/js/plugins/chartjs.min.js"></script>
 
 
 
-
-
-
-<script src="https://demos.creative-tim.com/test/material-dashboard-pro/assets/js/plugins/chartjs.min.js" type="text/javascript"></script>
 
 <script type="text/javascript">
    
@@ -265,17 +269,6 @@
 
      
     </script>
-<script src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/js/plugins/moment.min.js" type="text/javascript"></script>
-<script src="https://demos.creative-tim.com/test/material-dashboard-pro/assets/js/material-dashboard.min.js?v=1.0.0" type="text/javascript"></script>
 
 
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993" integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA==" data-cf-beacon='{"rayId":"7a32cc853d37ee1d","version":"2023.2.0","r":1,"token":"1b7cbb72744b40c580f8633c6b62637e","si":100}' crossorigin="anonymous"></script>
-
-
-
-   
-
-   
-
-<script src="../assets/js/plugins/chartjs.min.js"></script>
 @endsection

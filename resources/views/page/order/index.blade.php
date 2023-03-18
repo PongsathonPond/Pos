@@ -84,10 +84,19 @@
                                         target="_blank"  class="text-danger" > ออกใบเสร็จ <i class="fas fa-print"></i></a>
 
                                 </td>
+
                                 <td>
+                                    
+                                   
+                                 @if ( Auth::user()->role == 1 )
                                     <a href="{{ url('/listall/delete/' . $item->id) }}"class="btn btn-secondary btn-sm bg-gradient-danger mb-3"
                                         onclick="return confirm('ลบหรือไม่ ?')"> ลบข้อมูล</a>
+                                 @endif
+
+
+
                                 </td>
+
 
                                
                             </tr>

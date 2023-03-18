@@ -227,6 +227,15 @@
                   
                 </tr>
 
+                <tr class="tabletitle">
+                    <td >พนักงานขาย</td>
+                   
+                    
+                    
+                    <td ><h2>  {{ $print->user_auth }}</h2></td>
+                  
+                </tr>
+
             </table>
         </div><!--End Table-->
 

@@ -6,10 +6,15 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ListAll;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\DebtorsController;
+use App\Http\Controllers\paymentController;
+use App\Http\Controllers\backupController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Http\Controllers\PDFController;
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -107,6 +112,8 @@ Route::middleware([
         return view('dashboard',compact('qty','category','debtors','price','dash1','dash1_1','summon'));
     })->name('dashboard');
 
+    Route::get('/barcode/{id}', 'App\Http\Controllers\BarcodeController@index')->name('home.index');
+
     Route::get('/shop', [CartController::class, 'cartList'])->name('shopP');
     Route::get('/shopS', [CartController::class, 'cartListS'])->name('shopS');
     
@@ -125,7 +132,13 @@ Route::middleware([
     Route::get('/category', [Category::class, 'index'])->name('product.category');
     Route::post('/category/store', [Category::class, 'store'])->name('category_store');
     Route::post('category-update/{id}', [Category::class, 'update']);
-   
+    Route::get('/category/delete/{id}', [Category::class, 'delete']);
+
+
+
+    Route::get('/payment/delete/{id}', [paymentController::class, 'delete']);
+
+
     Route::post('/list/store', [ListAll::class, 'store'])->name('list');
     Route::get('/list', [ListAll::class, 'index'])->name('listindex');
     Route::get('/lists', [ListAll::class, 'indexS'])->name('listindexs');
@@ -138,10 +151,12 @@ Route::middleware([
     Route::post('/debtors/store', [DebtorsController::class, 'store'])->name('debtors_store');
     Route::get('/debtors/{id}', [DebtorsController::class, 'read']);
     Route::post('/debtors/storeId', [DebtorsController::class, 'storeid'])->name('debtors_storeid');
+    
 
 
     Route::get('/dashboard1', [dashboardController::class, 'dash1'])->name('dash1');
     Route::post('/dashboard1/find', [dashboardController::class, 'dash1find'])->name('finddash1');
+    Route::get('/our_backup_database', [backupController::class, 'our_backup_database'])->name('our_backup_database');
 
-   
+    // Route::get('/our_backup_database', 'backupController@our_backup_database')->name('our_backup_database');
 });

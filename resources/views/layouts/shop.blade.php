@@ -231,7 +231,7 @@
                 </li>
             @endif
 
-
+            @if ( Auth::user()->role == 1 )
 
             <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">สถิติ
@@ -259,7 +259,7 @@
                 </li>
             @endif
 
-
+            @endif
             </ul>
         </div>
         <div class="sidenav-footer position-absolute w-100 bottom-0 ">

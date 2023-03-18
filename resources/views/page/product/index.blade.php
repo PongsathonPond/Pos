@@ -101,6 +101,7 @@
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
                                 ราคาปลีก/ส่ง</th>
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">จำนวน</th>
+
                             <th></th>
                         </tr>
                     </thead>
@@ -136,9 +137,21 @@
                                 </td>
 
                                 <td class="align-middle">
-                                    <button type="button" class="btn btn-secondary btn-sm bg-gradient-secondary mb-3  "
+
+                                    <button type="button" class="btn btn-secondary btn-sm bg-gradient-secondary mb-3 "
                                         data-bs-toggle="modal" data-bs-target="#modal-default{{$item->id_product }}"> <i
                                             class="far fa-edit"></i></button>
+
+                                            <a href="{{ url('/barcode/' . $item->id_product) }} "  target="_blank" class="btn btn-secondary btn-sm bg-gradient-secondary mb-3"
+                                                onclick="return confirm('สร้างบาร์โค้ด ?')"> สร้างบาร์โค้ด</a>
+        
+           
+
+
+
+                                        
+                                                
+
 
                                     <div class="modal fade" id="modal-default{{$item->id_product }}" tabindex="-1" role="dialog"
                                         aria-labelledby="modal-default" aria-hidden="true">

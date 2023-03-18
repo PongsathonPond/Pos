@@ -220,6 +220,15 @@
                     @endforeach
                 </tr>
 
+                <tr class="tabletitle">
+                    <td >พนักงานขาย</td>
+                   
+                    @foreach($order_receipt as $item)
+                    
+                    <td ><h2>  {{ $item->user_auth }}</h2></td>
+                    @endforeach
+                </tr>
+
             </table>
         </div><!--End Table-->
 
