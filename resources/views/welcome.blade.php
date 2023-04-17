@@ -18,6 +18,7 @@
 				
 				
            		<button class="btn"><a  href="{{route('login')}}">เข้าสู่ระบบ</a></button>
+				<button class="btn"><a  href="{{route('register')}}">เพิ่มพนักงานขาย</a></button>
                
                
                 

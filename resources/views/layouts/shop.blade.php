@@ -74,7 +74,29 @@
                     </li>
                 @endif
 
+
                 @if (request()->routeIs('shopP'))
+                <li class="nav-item">
+                    <a class="nav-link text-white active bg-gradient-success " href="{{ route('mo') }}" target="_blank">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">shopping_cart</i>
+                        </div>
+                        <span class="nav-link-text ms-1">จอแสดงผลการขาย</span>
+                    </a>
+                </li>
+            @else
+                <li class="nav-item">
+                    <a class="nav-link text-white " href="{{ route('mo') }}" target="_blank">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">shopping_cart</i>
+                        </div>
+                        <span class="nav-link-text ms-1">จอแสดงผลการขาย</span>
+                    </a>
+                </li>
+            @endif
+
+
+                @if (request()->routeIs('mo'))
                     <li class="nav-item">
                         <a class="nav-link text-white active bg-gradient-success " href="{{ route('shopP') }}">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -231,8 +253,35 @@
                 </li>
             @endif
 
+
+
             @if ( Auth::user()->role == 1 )
 
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">จัดพนักงานขาย
+                    </h6>
+                </li>
+                
+            @if (request()->routeIs('user.index'))
+                <li class="nav-item">
+                    <a class="nav-link text-white active bg-gradient-success "
+                        href="{{ route('product.category') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">group</i>
+                        </div>
+                        <span class="nav-link-text ms-1">ข้อมูลพนักงานขาย</span>
+                    </a>
+                </li>
+            @else
+                <li class="nav-item">
+                    <a class="nav-link text-white " href="{{ route('user.index') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">group</i>
+                        </div>
+                        <span class="nav-link-text ms-1">ข้อมูลพนักงานขาย</span>
+                    </a>
+                </li>
+            @endif
             <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">สถิติ
                     </h6>

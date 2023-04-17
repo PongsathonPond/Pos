@@ -9,9 +9,8 @@ class BarcodeController extends Controller
     public function index($id) 
     {
         
-        $int = (int)$id;
-        
-        $productCode =  $int;
+       
+        $productCode =  $id;
        
         return view('page.barcode.barcode', [
             'productCode' => $productCode

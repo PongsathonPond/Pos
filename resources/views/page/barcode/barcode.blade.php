@@ -12,9 +12,9 @@
     <body>
         <div class="container mt-5">
             <div class="container mt-4">
-          
-            <div class="mb-3">{!! DNS1D::getBarcodeHTML("$productCode", 'C39') !!}</div>
-           
+        
+            <div class="mb-3">{!! DNS1D::getBarcodeHTML($productCode, 'C128') !!}</div>
+  
         </div> 
         </div>
     </body>

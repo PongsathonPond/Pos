@@ -8,6 +8,16 @@ use App\Models\Orders;
 use App\Models\Debtors;
 class CartController extends Controller
 {
+
+    public function mo()
+    {
+        
+       
+        $cartItems = \Cart::getContent();
+       
+        return view('page.shop.view', compact('cartItems'));
+    }
+
     public function cartList()
     {
         

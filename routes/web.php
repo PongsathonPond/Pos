@@ -8,6 +8,7 @@ use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\DebtorsController;
 use App\Http\Controllers\paymentController;
 use App\Http\Controllers\backupController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -114,6 +115,8 @@ Route::middleware([
 
     Route::get('/barcode/{id}', 'App\Http\Controllers\BarcodeController@index')->name('home.index');
 
+
+    Route::get('/shop-mo', [CartController::class, 'mo'])->name('mo');
     Route::get('/shop', [CartController::class, 'cartList'])->name('shopP');
     Route::get('/shopS', [CartController::class, 'cartListS'])->name('shopS');
     
@@ -158,5 +161,8 @@ Route::middleware([
     Route::post('/dashboard1/find', [dashboardController::class, 'dash1find'])->name('finddash1');
     Route::get('/our_backup_database', [backupController::class, 'our_backup_database'])->name('our_backup_database');
 
+    Route::get('/user', [UsersController::class, 'index'])->name('user.index');
+    Route::get('/user', [UsersController::class, 'index'])->name('user.index');
+    Route::post('user-update/{id}', [UsersController::class, 'update']);
     // Route::get('/our_backup_database', 'backupController@our_backup_database')->name('our_backup_database');
 });
