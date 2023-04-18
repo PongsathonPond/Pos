@@ -37,13 +37,17 @@ class CartController extends Controller
         
         $deb = Debtors::all();
         $cartItems = \Cart::getContent();
+        
+        $reversedCart = $cartItems->reverse();
+
+       
         $listall = DB::table('orders')
        ->orderBy('id', 'desc')
        ->paginate(1);
     
        $lastID = Orders::max('id');
        $order_receipt = Orders::where('id',$lastID)->get();
-        return view('page.shop.indexS', compact('cartItems','listall','order_receipt','deb'));
+        return view('page.shop.indexS', compact('reversedCart','listall','order_receipt','deb'));
     }
 
     public function addToCart(Request $request)

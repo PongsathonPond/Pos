@@ -56,7 +56,7 @@
                             </thead>
                             <tbody>
                             @foreach($listall as $item)
-
+                         
                             <tr>
 
                                 <td>
@@ -190,9 +190,14 @@
                         <tbody>
                             @php
                                 $index=0;
-                            @endphp
-                            @foreach ($cartItems as $item)
                                 
+                            @endphp
+
+                         
+
+                            @foreach ($reversedCart as $item)
+                           
+                          
                                 <tr>
 
                                     <td>

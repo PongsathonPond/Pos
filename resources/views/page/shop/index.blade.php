@@ -193,6 +193,7 @@
                             @endphp
                             @foreach ($cartItems as $item)
                                 
+                       
                                 <tr>
 
                                     <td>

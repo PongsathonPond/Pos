@@ -96,7 +96,7 @@
             @endif
 
 
-                @if (request()->routeIs('mo'))
+                @if (request()->routeIs('shopP'))
                     <li class="nav-item">
                         <a class="nav-link text-white active bg-gradient-success " href="{{ route('shopP') }}">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
