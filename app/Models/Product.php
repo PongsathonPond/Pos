@@ -18,4 +18,9 @@ class Product extends Model
         'category_id',
     ];
 
+    public function propro()
+    {
+        return $this->hasMany(Categories::class, 'id', 'category_id');
+    }
+
 }

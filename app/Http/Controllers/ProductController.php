@@ -18,8 +18,25 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'id_product' => 'required|unique:products',
+            'name' => 'required',
+            'priceP' => 'required',
+            'priceS' => 'required',
+            'qty' => 'required',
+        ],
+            [
+                'id_product.unique' => "รหัสสินค้าซ้ำ",
+                'name.required' => "กรุณากรอกชื่อสินค้า",
+                'priceP.required' => "กรุณากรอกราคาขายปลีกสินค้า",
+                'priceS.required' => "กรุณากรอกราคาขายส่งสินค้า",
+                'qty.required' => "กรุณากรอกจำนวนสินค้า",
+            ],
+
+        );
+
         $tableName = new Product();
-        $tableName->id_product = $request->id;
+        $tableName->id_product = $request->id_product;
         $tableName->name = $request->name;
         $tableName->priceP = $request->priceP;
         $tableName->priceS = $request->priceS;
@@ -62,6 +79,14 @@ class ProductController extends Controller
 
         return redirect()->back()->with('update', "อัพเดตข้อมูลเรียบร้อย");
         // return redirect()->route('usermanager')->with('success',"อัพเดตข้อมูลเรียบร้อย");
+    }
+
+    public function delete($id)
+    {
+        //ลบข้อมูล
+        $delete = Product::where('id_product',$id)->delete();
+        return redirect()->back()->with('delete', "ลบเรียบร้อยแล้ว");
+
     }
 
 }

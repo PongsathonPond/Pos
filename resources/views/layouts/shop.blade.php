@@ -75,7 +75,7 @@
                 @endif
 
 
-                @if (request()->routeIs('shopP'))
+                @if (request()->routeIs('mo'))
                 <li class="nav-item">
                     <a class="nav-link text-white active bg-gradient-success " href="{{ route('mo') }}" target="_blank">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">

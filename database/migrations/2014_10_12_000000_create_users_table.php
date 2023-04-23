@@ -65,7 +65,7 @@ return new class extends Migration
             $table->string('type');
             $table->string('amount');
             $table->string('change');
-            $table->string('listall');
+            $table->longtext('listall');
             $table->string('listcount');
             $table->string('listprice');
             $table->timestamps();

@@ -177,6 +177,8 @@
                     <table class="table align-items-center mb-0">
                         <thead>
                             <tr>
+                                <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7">ลำดับ
+                                </th>
                                 <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7">ชื่อสินค้า
                                 </th>
                                 <th class="text-uppercase text-secondary text-1xl font-weight-bolder opacity-7 ps-2">
@@ -190,7 +192,7 @@
                         <tbody>
                             @php
                                 $index=0;
-                                
+                                    $i =1;
                             @endphp
 
                          
@@ -199,6 +201,15 @@
                            
                           
                                 <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 ">{{$i++}}</h6>
+
+                                            </div>
+                                        </div>
+                                    </td>
+
 
                                     <td>
                                         <div class="d-flex px-2 py-1">

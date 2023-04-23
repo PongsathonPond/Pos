@@ -130,7 +130,9 @@ Route::middleware([
     Route::get('/product', [ProductController::class, 'index'])->name('product.index');
     Route::post('/product/store', [ProductController::class, 'store'])->name('product_store');
     Route::post('/product-update/{id}', [ProductController::class, 'update']);
-    
+    Route::get('/product/delete/{id}', [ProductController::class, 'delete']);
+
+
 
     Route::get('/category', [Category::class, 'index'])->name('product.category');
     Route::post('/category/store', [Category::class, 'store'])->name('category_store');

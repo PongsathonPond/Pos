@@ -35,9 +35,14 @@
                                 <div class="input-group input-group-outline my-3">
                                     <input type="text" class="form-control" placeholder="ราคาปลีก" name="priceP">
                                 </div>
-
+                              
 
                             </div>
+                            @error('priceP')
+                            <div class="my-2">
+                                <span class="text-danger my-2"> {{ $message }} </span>
+                            </div>
+                            @enderror
                             <div class="col-6">
                                 <div class="input-group input-group-outline my-3">
                                     <input type="text" class="form-control" placeholder="ราคาส่ง" name="priceS">
@@ -45,13 +50,28 @@
 
 
                             </div>
+                            @error('priceS')
+                            <div class="my-2">
+                                <span class="text-danger my-2"> {{ $message }} </span>
+                            </div>
+                            @enderror
                             <div class="input-group input-group-outline my-1">
                                 <input type="text" class="form-control" placeholder="จำนวน" name="qty">
                             </div>
+                            @error('qty')
+                            <div class="my-2">
+                                <span class="text-danger my-2"> {{ $message }} </span>
+                            </div>
+                            @enderror
 
                             <div class="input-group input-group-static my-3">
-                                <input type="text" class="form-control" placeholder="BARCODE ID" name="id">
+                                <input type="text" class="form-control" placeholder="BARCODE ID" name="id_product">
                             </div>
+                            @error('id_product')
+                            <div class="my-2">
+                                <span class="text-danger my-2"> {{ $message }} </span>
+                            </div>
+                            @enderror
 
                             <button type="input" class="btn btn-success">Add Product</button>
 
@@ -81,6 +101,12 @@
                 <strong>พบข้อผิดพลาด !</strong> ไม่พบสินค้าในฐานข้อมูล
             </div>
         @endif
+
+        @if (session('delete'))
+        <div class="alert alert-danger" role="alert">
+            <strong>สำเร็จ !</strong> ลบข้อมูลเรียบร้อย
+        </div>
+    @endif
        
     </div>
 
@@ -96,6 +122,7 @@
                     <thead>
                         <tr>
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7">รหัสสินค้า</th>
+                            <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7">ประเภท</th>
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">ชื่อสินค้า
                             </th>
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
@@ -121,6 +148,23 @@
                                         </div>
                                     </div>
                                 </td>
+
+                                <td>
+                                    <div class="d-flex px-2">
+                                        <div class="my-auto">
+                                            <b>
+                                                
+                                              
+                                               @foreach ($item->propro as $item2)
+                                               {{$item2->name}}
+                                                   
+                                               @endforeach
+                                            </b>
+
+                                        </div>
+                                    </div>
+                                </td>
+
                                 <td>
                                     <b>{{ $item->name }}</b>
 
@@ -148,7 +192,8 @@
            
 
 
-
+                                                <a href="{{ url('/product/delete/' . $item->id_product) }}"class="btn btn-secondary btn-sm bg-gradient-danger mb-3"
+                                                    onclick="return confirm('ลบหรือไม่ ?')"> ลบข้อมูล</a>
                                         
                                                 
 
