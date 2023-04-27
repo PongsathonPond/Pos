@@ -185,6 +185,9 @@
                                     จำนวน</th>
                                 <th class="text-center text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7">
                                     ราคาต่อชิ้น</th>
+                                    <th class="text-center text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7">
+                                    ราคารวม</th>
+                                     
 
                                 <th class="text-secondary opacity-7"></th>
                             </tr>
@@ -232,6 +235,11 @@
                                     <td class="align-middle text-center text-sm">
                                         <span class="badge badge-pill badge-lg bg-gradient-success text-1xl" >    <h5 class="mb-0 " style="color: white">{{ $item->price }}</h5></span>
                                     </td>
+
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-pill badge-lg bg-gradient-success text-1xl" >    <h5 class="mb-0 " style="color: white">{{ $item->price * $item->quantity }}</h5></span>
+                                    </td>
+                                    
                                     <td class="align-middle">
 
                                         <a class="btn bg-gradient-danger btn-sm mt-3"
