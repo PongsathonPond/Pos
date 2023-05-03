@@ -54,11 +54,12 @@ class ProductController extends Controller
        
         
         $request->validate([
-
+            'id_product' => 'unique:products',
             'name' => 'required',
             'priceP' => 'required',
             'priceS' => 'required',
             'qty' => 'required',
+            
 
         ],
 
@@ -66,11 +67,13 @@ class ProductController extends Controller
             'priceP.required' => "กรุณาป้อนราคาขายปลีก",
             'priceS.required' => "กรุณาป้อนราคาขายส่ง",
             'qty.required' => "กรุณาป้อนจำนวน",
+            'id_product.unique' => "รหัสสินค้าซ้ำ",
             ]
         );  
         Product::where('id_product',$request->id)->update([
-
+            
             'name' => $request->name,
+            'id_product' => $request->id_product,
             'priceP' => $request->priceP,
             'priceS' => $request->priceS,
             'qty' => $request->qty,
@@ -84,7 +87,9 @@ class ProductController extends Controller
     public function delete($id)
     {
         //ลบข้อมูล
+        
         $delete = Product::where('id_product',$id)->delete();
+        
         return redirect()->back()->with('delete', "ลบเรียบร้อยแล้ว");
 
     }

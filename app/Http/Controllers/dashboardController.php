@@ -16,15 +16,22 @@ class dashboardController extends Controller
         $from = $request->start;
         $to = $request->end;
       
-        
+        // $orders = DB::table('order_products')
+        //         ->join('products', 'order_products.product_id', 'products.id_product')
+        //         ->select('products.name',DB::raw('SUM(quantity) as total_qty'),DB::raw('SUM(price) as total_price'))
+        //         ->whereBetween('order_products.created_at', [$from, $to])
+        //         ->groupBy('products.name')
+        //         ->orderBy('total_qty', 'desc')
+        //         ->get();
              $orders = DB::table('order_products')
                 ->join('products', 'order_products.product_id', 'products.id_product')
-                ->select('products.name',DB::raw('SUM(quantity) as total_qty'),DB::raw('SUM(price) as total_price'))
+                ->select('products.name','order_products.price',DB::raw('SUM(quantity) as total_qty'))
                 ->whereBetween('order_products.created_at', [$from, $to])
-                ->groupBy('products.name')
+                ->groupBy('products.name','order_products.price')
                 ->orderBy('total_qty', 'desc')
                 ->get();
                 
+              
         
         return view('page.dashboard.index1find',compact('orders','from','to'));
     }

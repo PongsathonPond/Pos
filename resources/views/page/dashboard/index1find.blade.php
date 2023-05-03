@@ -53,7 +53,10 @@
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
                                 จำนวน
                             </th>
-                        
+
+                            <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
+                                ราคาต่อชิ้น</th>
+
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
                                 ราคารวม</th>
 
@@ -75,7 +78,7 @@
                         @foreach ($orders as $item)
                             
                        
-                       
+                        
                             <tr>
                                 <td>
                                   
@@ -104,10 +107,16 @@
 
                                 </td>
                                 <td>
+                
+                                <b>{{$item->price}} บาท</b>
+                            </td>
+                                <td>
+
                                         @php
-                                            $sum += $item->total_price;
+                                            $sum += $item->price*$item->total_qty;
                                         @endphp
-                                    <b>{{$item->total_price}} บาท</b>
+
+                                    <b>{{$item->price*$item->total_qty}} บาท</b>
                                 </td>
                               
 
