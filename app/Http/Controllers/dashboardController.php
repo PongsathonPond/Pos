@@ -25,11 +25,20 @@ class dashboardController extends Controller
         //         ->get();
              $orders = DB::table('order_products')
                 ->join('products', 'order_products.product_id', 'products.id_product')
+                ->join('orders', 'order_products.order_id', 'orders.id')
                 ->select('products.name','order_products.price',DB::raw('SUM(quantity) as total_qty'))
                 ->whereBetween('order_products.created_at', [$from, $to])
                 ->groupBy('products.name','order_products.price')
                 ->orderBy('total_qty', 'desc')
                 ->get();
+
+                $orders1 = DB::table('orders')
+                ->select('type_sale',DB::raw('SUM(total_price) as total'))
+                ->whereBetween('created_at', [$from, $to])
+                ->groupBy('type_sale')
+                ->orderBy('total', 'desc')
+                ->get();
+                dd($orders1);
                 
               
         
