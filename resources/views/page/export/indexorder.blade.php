@@ -14,10 +14,6 @@
         @media print {
             .page-break { display: block; page-break-before: always; }
         }
-
-      .none{
-        display: none;
-      }
         #invoice-POS {
             box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
             padding: 3mm;
@@ -114,7 +110,6 @@
         }
 
     </style>
-
     <script>
         window.console = window.console || function(t) {};
     </script>
@@ -130,7 +125,7 @@
 
 </head>
 
-<input type="button" id= "printPageButton" class="printPageButton" style="display: block; width:100%; border:none; background-color:#008B8B; color:#ffffff; padding:14px 28px; font-size:16px;cursor:pointer;text-align:center;" value="สั่งพิมพ์ใบเสร็จ" onClick="window.print()">
+<input type="button" id= "printPageButton" class="printPageButton" style="display: block; width:100%; border:none; background-color:#008B8B; color:#ffffff; padding:10px 20px; font-size:10px;cursor:pointer;text-align:center;" value="สั่งพิมพ์ใบเสร็จ" onClick="window.print()">
 <body translate="no" >
 
 <div id="invoice-POS">
@@ -152,7 +147,7 @@
             </p>
         </div>
         <hr>
-        <p>รหัสใบเสร็จ </br>
+        <p style="text-align: center">รหัสใบเสร็จ </br>
            
             {{$print->slip_id}} 
            
@@ -180,8 +175,8 @@
 @foreach($print->listall as $key =>$row)
 <tr class="service">
     <td class="tableitem"><p class="itemtextname">{{$row}} </p></td>
-    <td class="tableitem"><p class="itemtext">{{$print->listcount[$key]}}</p></td>
-    <td class="tableitem"><p class="itemtext">{{$print->listprice[$key]}} </p></td>
+    <td class="tableitem"><p class="itemtext" style="font-size: 0.4cm">{{$print->listcount[$key]}}</p></td>
+    <td class="tableitem"><p class="itemtext" style="font-size: 0.4cm">{{$print->listprice[$key]}} </p></td>
 </tr>
 @endforeach
 
@@ -193,16 +188,16 @@
                  
                 </tr>
                 <tr class="tabletitle">
-                    <td >ยอดรับ</td>
+                    <td style="font-size: 0.4cm">ยอดรับ</td>
                     
                    
                     
-                    <td ><h2>{{$print->amount}} บาท</h2></td>
+                    <td ><h2 >{{$print->amount}} บาท</h2></td>
                   
                 </tr>
 
                 <tr class="tabletitle">
-                    <td >เงินทอน</td>
+                    <td style="font-size: 0.4cm">เงินทอน</td>
                   
                     
                     
@@ -210,7 +205,7 @@
                   
                 </tr>
                 <tr class="tabletitle">
-                    <td >ยอดรวม</td>
+                    <td style="font-size: 0.4cm">ยอดรวม</td>
                    
                    
                     
@@ -219,7 +214,7 @@
                 </tr>
 
                 <tr class="tabletitle">
-                    <td >วันที่ขาย</td>
+                    <td style="font-size: 0.4cm">วันที่ขาย</td>
                    
                   
                     
@@ -228,7 +223,7 @@
                 </tr>
 
                 <tr class="tabletitle">
-                    <td >พนักงานขาย</td>
+                    <td style="font-size: 0.4cm">พนักงานขาย</td>
                    
                     
                     

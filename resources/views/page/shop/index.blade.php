@@ -392,7 +392,7 @@
         <script>
             function printreceiptContent(el){
                 var data =
-                    '<input type="button" id= "printPageButton" class="printPageButton" style="display: block; width:100%; border:none; background-color:#008B8B; color:#fff; padding:14px 28px; font-size:16px;cursor:pointer;text-align:center;" value="สั่งพิมพ์ใบเสร็จ" onClick="window.print()">';
+                    '<input type="button" id= "printPageButton" class="printPageButton" style="display: block; width:100%; border:none; background-color:#008B8B; color:#fff; padding:5px 10px; font-size:10px;cursor:pointer;text-align:center;" value="สั่งพิมพ์ใบเสร็จ" onClick="window.print()">';
                 data += document.getElementById(el).innerHTML;
                 myReceipt = window.open("","myWin","left=50,top=50,width=400,height=800");
                 myReceipt.screnX = 0;

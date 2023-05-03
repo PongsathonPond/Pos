@@ -38,11 +38,11 @@ class dashboardController extends Controller
                 ->groupBy('type_sale')
                 ->orderBy('total', 'desc')
                 ->get();
-                dd($orders1);
+              
                 
               
         
-        return view('page.dashboard.index1find',compact('orders','from','to'));
+        return view('page.dashboard.index1find',compact('orders','from','to','orders1'));
     }
 
     

@@ -114,8 +114,10 @@
 
         <div class="card">
             <div class="card-header p-3 pt-2">
+                
+              
+                <h5>รายการสินค้า</h5> <a href="http://localhost/phpmyadmin/index.php?route=/sql&pos=0&db=pos&table=products"  target="_blank" class="btn btn-primary" style="float: left;">ข้อมูลสินค้า</a>
 
-                <h5>รายการสินค้า</h5>
             </div>
             <div class="table-responsive">
                 <table class="table align-items-center mb-0" id="myTable">

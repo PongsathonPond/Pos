@@ -129,6 +129,12 @@
                 </table>
                 <h5 style="margin-left: 20px">ยอดรวมจำนวน : {{$qty}}  ชิ้น</h5>
                 <h5 style="margin-left: 20px">ยอดขายรวม : {{$sum}}  บาท</h5>
+
+                @foreach ($orders1 as $item)
+                <h5 style="margin-left: 20px">{{$item->type_sale}} : {{$item->total}} บาท</h5>
+                @endforeach
+
+
             </div>
         </div>
 
