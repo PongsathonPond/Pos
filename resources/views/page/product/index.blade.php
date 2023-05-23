@@ -121,18 +121,24 @@
             </div>
             <div class="table-responsive">
                 
-                <table class="table table-bordered" id="myTable">
-        <thead>
-            <tr>
-            <th>#</th>
-                <th>id_product</th>
-                
-                <th>name</th>
-                <th>priceP</th>
-            
-            </tr>
-        </thead>
+            <table class="table align-items-center mb-0" id="myTable">
+            <thead>
+                        <tr>
+                            <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7">รหัสสินค้า</th>
+                            <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7">ประเภท</th>
+                            <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">ชื่อสินค้า
+                            </th>
+                            <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
+                                ราคาปลีก/ส่ง</th>
+                                <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
+                                ราคาส่ง</th>
+                            <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">จำนวน</th>
+
+                            <th></th>
+                        </tr>
+                    </thead>
     </table>
+    
             </div>
         </div>
 
@@ -147,15 +153,30 @@
                 serverSide: true,
                 ajax: "{{ route('product.index') }}",
                 columns: [
-                    {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                    {data: 'id_product', name: 'id_product'},
-                    {data: 'name', name: 'name'},
-                    {data: 'priceP', name: 'priceP', orderable: false, searchable: false},
+            { data: 'id_product', name: 'id_product' },
+            { data: 'category_name', name: 'category_name' }, // New column for category name
+            { data: 'name', name: 'name' },
+            { data: 'priceP', name: 'priceP'},
+            {data: 'priceS', name: 'priceS'},
+            { data: 'qty', name: 'qty' },
+            { data: 'action', name: 'action', orderable: false, searchable: false }
                 ],
                 deferRender: true,
                 // Pagination with server-side processing
                 serverSide: true,
                 processing: true,
+                "language": {
+                    "search": "<b>ค้นหา</b>",
+                    "zeroRecords": "ไม่พบข้อมูล - ขออภัย",
+                    "info": '',
+                    "infoEmpty": "ไม่มีข้อมูล",
+                    "infoFiltered": "",
+                    "lengthMenu": "   _MENU_ ",
+                    "paginate": {
+                        "previous": false,
+                        "next": false
+                    }
+                }
             });
         });
     </script>
