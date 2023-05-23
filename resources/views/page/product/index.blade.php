@@ -120,183 +120,46 @@
 
             </div>
             <div class="table-responsive">
-                <table class="table align-items-center mb-0" id="myTable">
-                    <thead>
-                        <tr>
-                            <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7">รหัสสินค้า</th>
-                            <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7">ประเภท</th>
-                            <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">ชื่อสินค้า
-                            </th>
-                            <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
-                                ราคาปลีก/ส่ง</th>
-                            <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">จำนวน</th>
-
-                            <th></th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-
-                        @foreach ($product as $item)
-                            <tr>
-                                <td>
-                                    <div class="d-flex px-2">
-                                        <div class="my-auto">
-                                            <b>
-                                                {{ $item->id_product }}
-                                            </b>
-
-                                        </div>
-                                    </div>
-                                </td>
-
-                                <td>
-                                    <div class="d-flex px-2">
-                                        <div class="my-auto">
-                                            <b>
-                                                
-                                              
-                                               @foreach ($item->propro as $item2)
-                                               {{$item2->name}}
-                                                   
-                                               @endforeach
-                                            </b>
-
-                                        </div>
-                                    </div>
-                                </td>
-
-                                <td>
-                                    <b>{{ $item->name }}</b>
-
-                                </td>
-                                <td>
-                                    <span class="badge badge-pill badge-lg bg-gradient-success">{{ $item->priceP }}</span>
-                                    <span class="badge badge-pill badge-lg bg-gradient-warning">{{ $item->priceS }}</span>
-                                </td>
-                                <td>
-                                    <b>
-                                        {{ $item->qty }}
-                                    </b>
-
-                                </td>
-
-                                <td class="align-middle">
-
-                                    <button type="button" class="btn btn-secondary btn-sm bg-gradient-secondary mb-3 "
-                                        data-bs-toggle="modal" data-bs-target="#modal-default{{$item->id_product }}"> <i
-                                            class="far fa-edit"></i></button>
-
-                                            <a href="{{ url('/barcode/' . $item->id_product) }} "  target="_blank" class="btn btn-secondary btn-sm bg-gradient-secondary mb-3"
-                                                onclick="return confirm('สร้างบาร์โค้ด ?')"> สร้างบาร์โค้ด</a>
-        
-           
-
-
-                                                <a href="{{ url('/product/delete/' . $item->id_product) }}"class="btn btn-secondary btn-sm bg-gradient-danger mb-3"
-                                                    onclick="return confirm('ลบหรือไม่ ?')"> ลบข้อมูล</a>
-                                        
-                                                
-
-
-                                    <div class="modal fade" id="modal-default{{$item->id_product }}" tabindex="-1" role="dialog"
-                                        aria-labelledby="modal-default" aria-hidden="true">
-                                        <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h6 class="modal-title font-weight-normal" id="modal-title-default">
-                                                        <b>จัดการสินค้า</b>
-                                                    </h6>
-                                                    <button type="button" class="btn-close text-dark"
-                                                        data-bs-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="p-4">
-                                                  
-                                                            <form action="{{ url('/product-update/' . $item->id_product) }}"
-                                                                method="post">
-                                                                @csrf
-                                                            <div class="row">
-
-                                                                <div class="col-12">
-                                                                    <div class="input-group input-group-static mb-4">
-                                                                        <label><b>ชื่อสินค้า</b></label>
-                                                                        <input type="text" class="form-control"  name="name" value="{{$item->name}}" >
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <div class="input-group input-group-static mb-4">
-                                                                        <label><b>ราคาปลีก</b></label>
-                                                                        <input type="text" class="form-control" name="priceP" value="{{$item->priceP}}">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <div class="input-group input-group-static mb-4">
-                                                                        <label><b>ราคาส่ง</b></label>
-                                                                        <input type="text" class="form-control" name="priceS" value="{{$item->priceS}}">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-12">
-                                                                    <div class="input-group input-group-static mb-4">
-                                                                        <label><b>จำนวน</b></label>
-                                                                        <input type="text" class="form-control" name="qty" value="{{$item->qty}}" >
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div >
-                                                                <button type="submit" class="btn bg-gradient-success">บันทึก</button>
-                                                                <button type="button" class="btn btn-link  ml-auto"
-                                                                    data-bs-dismiss="modal">ปิด</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                               
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </td>
-                            </tr>
-                        @endforeach
-
-
-                    </tbody>
-                </table>
+                
+                <table class="table table-bordered" id="myTable">
+        <thead>
+            <tr>
+            <th>#</th>
+                <th>id_product</th>
+                
+                <th>name</th>
+                <th>priceP</th>
+            
+            </tr>
+        </thead>
+    </table>
             </div>
         </div>
 
     </div>
+    @push('scripts')
 
 
-
-    <script>
-        $(document).ready(function() {
+<script type="text/javascript">
+        $(document).ready(function () {
             $('#myTable').DataTable({
-                responsive: true,
-                paging: true,
-                lengthMenu: [10, 25, 50, 75, 100, 10000],
-                ordering: false,
-                info: false,
-
-                "language": {
-                    "search": "<b>ค้นหา</b>",
-                    "zeroRecords": "ไม่พบข้อมูล - ขออภัย",
-                    "info": '',
-                    "infoEmpty": "ไม่มีข้อมูล",
-                    "infoFiltered": "",
-                    "lengthMenu": "   _MENU_ ",
-                    "paginate": {
-                        "previous": false,
-                        "next": false
-                    }
-                }
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('product.index') }}",
+                columns: [
+                    {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                    {data: 'id_product', name: 'id_product'},
+                    {data: 'name', name: 'name'},
+                    {data: 'priceP', name: 'priceP', orderable: false, searchable: false},
+                ],
+                deferRender: true,
+                // Pagination with server-side processing
+                serverSide: true,
+                processing: true,
             });
         });
     </script>
+@endpush
+
 @endsection
+ 

@@ -379,11 +379,12 @@
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
 
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.12.1/datatables.min.js"></script>
 
-    @stack('js')
+    @stack('scripts')
 </body>
 
 </html>

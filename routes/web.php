@@ -128,6 +128,7 @@ Route::middleware([
     Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
 
     Route::get('/product', [ProductController::class, 'index'])->name('product.index');
+ 
     Route::post('/product/store', [ProductController::class, 'store'])->name('product_store');
     Route::post('/product-update/{id}', [ProductController::class, 'update']);
     Route::get('/product/delete/{id}', [ProductController::class, 'delete']);
@@ -166,5 +167,6 @@ Route::middleware([
     Route::get('/user', [UsersController::class, 'index'])->name('user.index');
     Route::get('/user', [UsersController::class, 'index'])->name('user.index');
     Route::post('user-update/{id}', [UsersController::class, 'update']);
+ 
     // Route::get('/our_backup_database', 'backupController@our_backup_database')->name('our_backup_database');
 });

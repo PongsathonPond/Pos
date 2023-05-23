@@ -1,20 +1,52 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DataTables;
 use App\Models\Categories;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
+
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $typeCategory = Categories::all();
-        $product = Product::all();
+        // $product = Product::all();
+        
+      
+        
+        // return view('page.product.index', compact('typeCategory', 'product'));
 
-        return view('page.product.index', compact('typeCategory', 'product'));
+        // if ($request->ajax()) {
+        //     $data = Product::select(['id_product', 'category_id', 'name', 'priceP','priceS','qty']) // Select only the necessary columns
+        //         ->paginate(10); // Change 10 to the number of items you want per page
+
+        //     return datatables()->of($data)
+        //         ->addColumn('action', function ($row) {
+        //             // Add any action buttons you want here
+        //             // Example: return '<a href="'.route('users.edit', $row->id).'" class="btn btn-primary">Edit</a>';
+        //         })
+        //         ->rawColumns(['action'])
+        //         ->make(true);
+                
+        // }
+
+        if ($request->ajax()) {
+            $data = Product::select('*')->latest()->get(); // Change the pagination size as per your requirement
+
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('page.product.index', compact('typeCategory'));
+
     }
+    
 
     public function store(Request $request)
     {
@@ -89,6 +121,12 @@ class ProductController extends Controller
         
         return redirect()->back()->with('delete', "ลบเรียบร้อยแล้ว");
 
+    }
+
+    public function fetchRecords(Request $request)
+    {
+    $records = Product::all();
+    return $records;
     }
 
 }
