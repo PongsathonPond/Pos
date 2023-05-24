@@ -122,6 +122,9 @@
             <div class="table-responsive">
                 
             <table class="table align-items-center mb-0" id="myTable">
+            <div class="form-group">
+  
+</div>
             <thead>
                         <tr>
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7">รหัสสินค้า</th>
@@ -178,6 +181,8 @@
                     }
                 }
             });
+          
+            
         });
     </script>
 @endpush

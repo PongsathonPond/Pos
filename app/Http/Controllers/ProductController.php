@@ -16,10 +16,16 @@ class ProductController extends Controller
         if ($request->ajax()) {
  // Change the pagination size as per your requirement
                 
+                // $data = DB::table('products')
+                // ->join('categories', 'products.category_id', '=', 'categories.id')
+                // ->select('products.*', 'categories.name as category_name')
+                // ->orderByDesc('products.created_at');
+
                 $data = DB::table('products')
                 ->join('categories', 'products.category_id', '=', 'categories.id')
                 ->select('products.*', 'categories.name as category_name')
                 ->orderByDesc('products.created_at');
+                // $data = DB::table('products')->orderByDesc('products.created_at');
                 
             return DataTables::of($data)
                 ->addIndexColumn()
@@ -98,12 +104,23 @@ class ProductController extends Controller
                     </div>
                 </div>';
         
-
-
-                        
+                
                     return $actionButtons;
                 })
                 ->rawColumns(['action'])
+                ->filter(function ($query) use ($request) {
+                    if ($request->has('search') && !empty($request->search['value'])) {
+                        $searchValue = $request->search['value'];
+                        $searchTerms = explode('/', $searchValue);
+                        $categorySearchTerm = trim($searchTerms[0]);
+                        $nameSearchTerm = isset($searchTerms[1]) ? trim($searchTerms[1]) : null;
+            
+                        $query->where(function($subquery) use ($categorySearchTerm, $nameSearchTerm) {
+                            $subquery->where('categories.name', 'like', "%$categorySearchTerm%")
+                                     ->where('products.name', 'like', "%$nameSearchTerm%");
+                        });
+                    }
+                })
                 ->make(true);
         }
 
