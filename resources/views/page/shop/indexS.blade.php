@@ -394,17 +394,26 @@
 
         <script>
             function printreceiptContent(el){
+                // var data =
+                //     '<input type="button" id= "printPageButton" class="printPageButton" style="display: block; width:100%; border:none; background-color:#008B8B; color:#fff; padding:14px 28px; font-size:16px;cursor:pointer;text-align:center;" value="สั่งพิมพ์ใบเสร็จ" onClick="window.print()">';
+                // data += document.getElementById(el).innerHTML;
+                // myReceipt = window.open("","myWin","left=50,top=50,width=400,height=800");
+                // myReceipt.screnX = 0;
+                // myReceipt.screnY = 0;
+                // myReceipt.document.write(data);
+                // myReceipt.document.title = "พิมพ์ใบเสร็จรับเงิน";
+                // myReceipt.focus();
+
                 var data =
-                    '<input type="button" id= "printPageButton" class="printPageButton" style="display: block; width:100%; border:none; background-color:#008B8B; color:#fff; padding:14px 28px; font-size:16px;cursor:pointer;text-align:center;" value="สั่งพิมพ์ใบเสร็จ" onClick="window.print()">';
+                    '';
                 data += document.getElementById(el).innerHTML;
                 myReceipt = window.open("","myWin","left=50,top=50,width=400,height=800");
                 myReceipt.screnX = 0;
                 myReceipt.screnY = 0;
                 myReceipt.document.write(data);
                 myReceipt.document.title = "พิมพ์ใบเสร็จรับเงิน";
+                myReceipt.window.print();
                 myReceipt.focus();
-
-
             }
         </script>
         <script>

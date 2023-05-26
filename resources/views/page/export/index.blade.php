@@ -161,7 +161,7 @@
             <table>
                 <tr class="tabletitle">
                     <td class="item"><h2>ชื่อสินค้า</h2></td>
-                    <td class="Hours"><h2>จำนวน</h2></td>
+                    
                     <td class="Rate" style="text-align: center"><h2>ราคา</h2></td>
                 </tr>
 
@@ -174,9 +174,14 @@
                 @foreach($order_receipt as $item)
                 @foreach($item->listall as $key =>$row)
                 <tr class="service">
-                    <td class="tableitem"><p class="itemtextname">{{$row}} </p></td>
-                    <td class="tableitem"><p class="itemtext" style="font-size: 0.4cm">{{$item->listcount[$key]}}</p></td>
-                    <td class="tableitem"><p class="itemtext" style="font-size: 0.4cm">{{$item->listprice[$key]}} </p></td>
+                    <td class="tableitem"><p class="itemtextname">{{$row}} <br> จน.{{$item->listcount[$key]}} x {{$item->listprice[$key]}} </p> </td>
+                    <!-- <td class="tableitem"><p class="itemtext" style="font-size: 0.4cm">{{$item->listcount[$key]}}</p></td> -->
+                    <td class="tableitem"><p class="itemtext" style="font-size: 0.4cm">{{$item->listprice[$key]*$item->listcount[$key]}} </p></td>
+                    @php                                                                 
+                
+                $j += $item->listcount[$key];
+                 @endphp
+
                 </tr>
                 @endforeach
                 @endforeach
@@ -186,10 +191,19 @@
                  
                 </tr>
                 <tr class="tabletitle">
+                    <td style="font-size: 0.4cm">ยอดรวม</td>
+                   
+                    @foreach($order_receipt as $item)
+                    
+                    <td style="font-size: 0.4cm"><h2>{{$item->total_price}} บาท</h2></td>
+                    @endforeach
+                </tr>
+                
+                <tr class="tabletitle">
                     <td style="font-size: 0.4cm">ยอดรับ</td>
                     
                     @foreach($order_receipt as $item)
-                    
+                
                     <td style="font-size: 0.4cm"><h2>{{$item->amount}} บาท</h2></td>
                     @endforeach
                 </tr>
@@ -202,14 +216,17 @@
                     <td style="font-size: 0.4cm"><h2>{{$item->change}} บาท</h2></td>
                     @endforeach
                 </tr>
+
                 <tr class="tabletitle">
-                    <td style="font-size: 0.4cm">ยอดรวม</td>
+                    <td style="font-size: 0.4cm">รวมรายการ</td>
+                  
                    
-                    @foreach($order_receipt as $item)
                     
-                    <td ><h2>{{$item->total_price}} บาท</h2></td>
-                    @endforeach
+                    <td style="font-size: 0.4cm"><h2>{{$j}} รายการ</h2></td>
+                    
                 </tr>
+                
+               
 
                 <tr class="tabletitle">
                     <td style="font-size: 0.4cm">วันที่ขาย</td>

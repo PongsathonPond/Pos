@@ -103,15 +103,15 @@ return new class extends Migration
            $table->foreign('debt_id')->references('id')->on('debtors')->onDelete('cascade');
        });
 
-    //    Schema::create('collections', function (Blueprint $table) {
-    //        $table->id();
-    //        $table->unsignedBigInteger('debt_id');
-    //        $table->string('status');
-    //        $table->date('collection_date');
-    //        $table->timestamps();
-    //        $table->foreign('debt_id')->references('id')->on('debts')->onDelete('cascade');
-    //    });
-
+       Schema::create('refunds', function (Blueprint $table) {
+        $table->id();
+        $table->string('name');
+        $table->string('key_slug');
+        $table->decimal('priceP', 10, 2);
+        $table->decimal('priceS', 10, 2);
+        $table->integer('qty');
+        $table->timestamps();
+        });
     }
 
 
@@ -128,5 +128,6 @@ return new class extends Migration
         Schema::dropIfExists('payments');
         Schema::dropIfExists('debts');
         Schema::dropIfExists('debtors');
+        Schema::dropIfExists('refunds');
     }
 };

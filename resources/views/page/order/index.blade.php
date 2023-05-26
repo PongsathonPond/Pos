@@ -83,6 +83,11 @@
                                          <a   href="{{ URL::to('generate-pdf2/' . $item->id) }}"
                                         target="_blank"  class="text-danger" > ออกใบเสร็จ <i class="fas fa-print"></i></a>
 
+                                        <a   href="{{ URL::to('generate-a4/' . $item->id) }}"
+                                        target="_blank"  class="text-success" >  A4 <i class="fas fa-print"></i></a>
+
+
+
                                 </td>
 
                                 <td>

@@ -14,13 +14,7 @@ class ProductController extends Controller
         $typeCategory = Categories::all();
        
         if ($request->ajax()) {
- // Change the pagination size as per your requirement
-                
-                // $data = DB::table('products')
-                // ->join('categories', 'products.category_id', '=', 'categories.id')
-                // ->select('products.*', 'categories.name as category_name')
-                // ->orderByDesc('products.created_at');
-
+ 
                 $data = DB::table('products')
                 ->join('categories', 'products.category_id', '=', 'categories.id')
                 ->select('products.*', 'categories.name as category_name')

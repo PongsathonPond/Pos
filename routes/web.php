@@ -9,6 +9,7 @@ use App\Http\Controllers\DebtorsController;
 use App\Http\Controllers\paymentController;
 use App\Http\Controllers\backupController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\RefundController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -150,7 +151,9 @@ Route::middleware([
     Route::get('/lists', [ListAll::class, 'indexS'])->name('listindexs');
     Route::get('generate-pdf/{id}', [PDFController::class, 'generatePDF1'])->name('showpdf');
     Route::get('generate-pdf2/{id}', [PDFController::class, 'generatePDF2'])->name('showpdf2');
-
+    Route::get('generate-a4/{id}', [PDFController::class, 'generateA4'])->name('showa4');
+    
+   
     Route::get('/listall/delete/{id}', [ListAll::class, 'delete']);
 
     Route::get('/debtors', [DebtorsController::class, 'index'])->name('debtors.index');
@@ -168,5 +171,8 @@ Route::middleware([
     Route::get('/user', [UsersController::class, 'index'])->name('user.index');
     Route::post('user-update/{id}', [UsersController::class, 'update']);
  
+
+    Route::get('/refund',[RefundController::class, 'index'])->name('refund.index');
+    Route::post('/refund/delete', [RefundController::class, 'addToRefund'])->name('refund.delete');
     // Route::get('/our_backup_database', 'backupController@our_backup_database')->name('our_backup_database');
 });

@@ -125,7 +125,8 @@
 
 </head>
 
-<input type="button" id= "printPageButton" class="printPageButton" style="display: block; width:100%; border:none; background-color:#008B8B; color:#ffffff; padding:10px 20px; font-size:10px;cursor:pointer;text-align:center;" value="สั่งพิมพ์ใบเสร็จ" onClick="window.print()">
+
+
 <body translate="no" >
 
 <div id="invoice-POS">
@@ -161,7 +162,7 @@
             <table>
                 <tr class="tabletitle">
                     <td class="item"><h2>ชื่อสินค้า</h2></td>
-                    <td class="Hours"><h2>จำนวน</h2></td>
+                  
                     <td class="Rate" style="text-align: center"><h2>ราคา</h2></td>
                 </tr>
 
@@ -174,10 +175,14 @@
 
 @foreach($print->listall as $key =>$row)
 <tr class="service">
-    <td class="tableitem"><p class="itemtextname">{{$row}} </p></td>
-    <td class="tableitem"><p class="itemtext" style="font-size: 0.4cm">{{$print->listcount[$key]}}</p></td>
-    <td class="tableitem"><p class="itemtext" style="font-size: 0.4cm">{{$print->listprice[$key]}} </p></td>
+    <td class="tableitem"><p class="itemtextname">{{$row}}<br> จน.{{$print->listcount[$key]}} x {{$print->listprice[$key]}} </p></td>
+
+    <td class="tableitem"><p class="itemtext" style="font-size: 0.4cm">{{$print->listprice[$key]*$print->listcount[$key]}} </p></td>
 </tr>
+@php                                                                 
+                
+                $j += $print->listcount[$key];
+                 @endphp
 @endforeach
 
              
@@ -188,31 +193,38 @@
                  
                 </tr>
                 <tr class="tabletitle">
-                    <td style="font-size: 0.4cm">ยอดรับ</td>
+                    <td style="font-size: 0.4cm">ยอดรวม</td>
                     
                    
-                    
-                    <td ><h2 >{{$print->amount}} บาท</h2></td>
+            
+                    <td style="font-size: 0.4cm"><h2 >{{$print->total_price}} บาท</h2></td>
                   
                 </tr>
 
+                <tr class="tabletitle">
+                    <td style="font-size: 0.4cm">ยอดรับ</td>
+                  
+                    
+                    
+                    <td style="font-size: 0.4cm"><h2>{{$print->amount}} บาท</h2></td>
+                  
+                </tr>
                 <tr class="tabletitle">
                     <td style="font-size: 0.4cm">เงินทอน</td>
-                  
+                   
+                   
                     
-                    
-                    <td ><h2>{{$print->change}} บาท</h2></td>
-                  
+                    <td style="font-size: 0.4cm "><h2>{{$print->change}} บาท</h2></td>
+                   
                 </tr>
                 <tr class="tabletitle">
-                    <td style="font-size: 0.4cm">ยอดรวม</td>
-                   
+                    <td style="font-size: 0.4cm">รวมรายการ</td>
+                  
                    
                     
-                    <td ><h2>{{$print->total_price}} บาท</h2></td>
-                   
+                    <td style="font-size: 0.4cm"><h2>{{$j}} รายการ</h2></td>
+                    
                 </tr>
-
                 <tr class="tabletitle">
                     <td style="font-size: 0.4cm">วันที่ขาย</td>
                    
@@ -245,7 +257,9 @@
 
 
 
-
+<script>
+     window.print()
+  </script>
 
 </body>
 
