@@ -105,13 +105,16 @@ class ProductController extends Controller
                 ->filter(function ($query) use ($request) {
                     if ($request->has('search') && !empty($request->search['value'])) {
                         $searchValue = $request->search['value'];
-                        $searchTerms = explode('/', $searchValue);
-                        $categorySearchTerm = trim($searchTerms[0]);
-                        $nameSearchTerm = isset($searchTerms[1]) ? trim($searchTerms[1]) : null;
-            
-                        $query->where(function($subquery) use ($categorySearchTerm, $nameSearchTerm) {
-                            $subquery->where('categories.name', 'like', "%$categorySearchTerm%")
-                                     ->where('products.name', 'like', "%$nameSearchTerm%");
+                        $searchTerms = explode(' ', $searchValue);
+                        
+                        $query->where(function($subquery) use ($searchTerms) {
+                            foreach ($searchTerms as $term) {
+                                $subquery->where(function($subquery) use ($term) {
+                                    $subquery->where('products.id_product', 'like', "%$term%")
+                                            ->orWhere('categories.name', 'like', "%$term%")
+                                             ->orWhere('products.name', 'like', "%$term%");
+                                });
+                            }
                         });
                     }
                 })
