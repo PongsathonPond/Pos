@@ -40,9 +40,13 @@ class dashboardController extends Controller
                 ->get();
               
                 
-              
+
+    $refund = DB::table('refunds')
+    ->whereBetween('created_at', [$from, $to])
+    ->sum('priceP');
+
         
-        return view('page.dashboard.index1find',compact('orders','from','to','orders1'));
+        return view('page.dashboard.index1find',compact('orders','from','to','orders1','refund'));
     }
 
     

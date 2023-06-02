@@ -17,9 +17,19 @@
 
                 <form action="{{ route('refund.delete') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="input-group input-group-static mb-4">
-                        <input type="text" class="form-control" name="id_product" id="inputkey" placeholder="BARCODE ID">
-                    </div>
+
+                    <div class="input-group input-group-outline my-3">
+                                <input type="text" class="form-control" placeholder="จำนวนที่คืน" name="qty">
+                            </div>
+
+                    <div class="input-group input-group-outline my-3">
+                                <input type="text" class="form-control" placeholder="BARCODE ID" name="id_product">
+                            </div>
+
+
+                            <button type="input" class="btn btn-success">Add Category</button>
+
+
                 </form>
             </div>
         </div>

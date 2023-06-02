@@ -39,12 +39,14 @@
                   </div>
                   <div class="grid grid-cols-2 gap-6 text-xs my-2">
                      <div>
-                        <p>ส.พานิชย์</p>
+                        <p><input type="text" class="outline-none" placeholder="ชื่อร้าน"</p>
                         <p>137 หมู่ 6 ตำบล มะเกลือใหม่ อ.สูงเนิน จ.นครราชสีมา </p>
-                        <p>เลขประจำตัวผู้เสียภาษี 0303537000062</p>
+                        <!-- <p>เลขประจำตัวผู้เสียภาษี 0303537000062</p>
                         <p>โทร. 044-441259</p>
+                         -->
                         <p>เบอร์มือถือ 092-5377750</p>
-                        <p>โทรสาร 044-283073</p>
+                        <!-- <p>โทรสาร 044-283073</p>
+                         -->
                      </div>
                      <div>
                         <div class="grid grid-cols-3 border-y-2 border-slate-300 py-4">
@@ -55,7 +57,7 @@
                               <p>ผู้ขาย</p>
                            </div>
                            <div class="col-span-2">
-                              <p>INV2023</p>
+                              <p>{{$print->slip_id}}</p>
                               <p><input type="text" class="outline-none" placeholder="กรอกวันที่"></input></p>
                               <p><input type="text" class="outline-none" placeholder="กรอกวันที่"></input></p>
                               <p>ส.พานิชย์</p>
@@ -121,7 +123,7 @@
                      </div>
                   </div>
                   <div>
-                     <p class="text-right">ในนาม ส.พานิชย์</p>
+                     <p class="text-right"> <input type="text" class="outline-none text-right" placeholder="ในนาม ชื่อร้านค้า"</p>
                      <div class="flex justify-end gap-4 pt-20">
                         <p class="w-36 text-center border-t py-2">ผู้อนุมัติ</p>
                         <p class="w-36 text-center border-t py-2">วันที่</p>

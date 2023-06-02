@@ -134,6 +134,8 @@
                 <h5 style="margin-left: 20px">{{$item->type_sale}} : {{$item->total}} บาท</h5>
                 @endforeach
 
+                <h5 style="margin-left: 20px">ยอดคืนของ : {{$refund}}  บาท</h5>
+
 
             </div>
         </div>
