@@ -315,7 +315,11 @@
                             </label>
                             <input type="text" class="form-control"  list="browsers" name="debtors_id"
                             style="color: rgb(19, 23, 235)" placeholder="รหัสผู้ค้างชำระ">
-
+                            @error('debtors_id')
+                            <div class="my-2">
+                            <span class="text-danger my-2"> {{ $message }} </span>
+                             </div>
+                            @enderror
                             
                             <datalist id="browsers">
                                   @foreach ($deb as $item)

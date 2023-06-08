@@ -21,8 +21,8 @@ class RefundController extends Controller
     public function addToRefund(Request $request)
     {
 
+      
         $delete = Order_product::where('product_id',$request->id_product)->get();
-        
         
         if (empty($delete[0])) {
             session()->flash('error', 'Product is Added to Cart Successfully !');

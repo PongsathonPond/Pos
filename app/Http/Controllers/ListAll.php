@@ -41,16 +41,35 @@ class ListAll extends Controller
     {
 
      
-        $request->validate([
-            'amount' => 'required',
-            'change' => 'required',
-        ],
-            [
-                'amount.required' => "กรุณาใส่จำนวนเงินที่รับ",
-                'change.required' => "กรุณากดคำนวณเงินทอน",
+        if($request->type_sale == "ค้างชำระ"){
+            $request->validate([
+                'amount' => 'required',
+                'change' => 'required',
+                'debtors_id' =>'required',
             ],
-
-        );
+                [
+                    'amount.required' => "กรุณาใส่จำนวนเงินที่รับ",
+                    'change.required' => "กรุณากดคำนวณเงินทอน",
+                    'debtors_id.required' => "กรุณาใส่รหัสผู้ค้างชำระ",
+                ],
+    
+            );
+        }else{
+            $request->validate([
+                'amount' => 'required',
+                'change' => 'required',
+                
+            ],
+                [
+                    'amount.required' => "กรุณาใส่จำนวนเงินที่รับ",
+                    'change.required' => "กรุณากดคำนวณเงินทอน",
+                    
+                ],
+    
+            );
+        }
+     
+     
         $id = IdGenerator::generate(['table' => 'orders', 'field' => 'slip_id', 'length' => 17, 'prefix' => 'SLIP-']);
 
         $tableName = new Orders();
