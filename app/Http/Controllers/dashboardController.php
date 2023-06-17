@@ -38,6 +38,11 @@ class dashboardController extends Controller
                 ->groupBy('type_sale')
                 ->orderBy('total', 'desc')
                 ->get();
+
+                $orders2 = DB::table('orders')
+                ->whereBetween('created_at', [$from, $to])
+                ->where('type_sale','ค้างชำระ')
+                ->sum('total_price');
               
                 
 
@@ -45,8 +50,14 @@ class dashboardController extends Controller
     ->whereBetween('created_at', [$from, $to])
     ->sum('priceP');
 
+    $payment = DB::table('payments')
+    ->whereBetween('created_at', [$from, $to])
+    ->sum('amount');
+
+    
+
         
-        return view('page.dashboard.index1find',compact('orders','from','to','orders1','refund'));
+        return view('page.dashboard.index1find',compact('orders','from','to','orders1','refund','payment','orders2'));
     }
 
     
